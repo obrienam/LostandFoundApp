@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Type-->
+        <!--Lost Items-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="LostandFoundApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -15,17 +15,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="P3W-Vw-pyw">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="P3W-Vw-pyw">
                                 <rect key="frame" x="1" y="44" width="375" height="575"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellID" id="d3f-Q3-QRu">
-                                        <rect key="frame" x="0.0" y="55.5" width="375" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="d3f-Q3-QRu" id="eTi-Eo-BqN">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -43,7 +43,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Type" id="qJH-Bv-aLn">
+                    <navigationItem key="navigationItem" title="Lost Items" id="qJH-Bv-aLn">
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="kup-Sb-PgO">
                             <connections>
                                 <action selector="editButton:" destination="BYZ-38-t0r" id="GlZ-js-xf2"/>
@@ -130,7 +130,7 @@
             </objects>
             <point key="canvasLocation" x="1077.5999999999999" y="129.98500749625188"/>
         </scene>
-        <!--A-Z-->
+        <!--Experiments-->
         <scene sceneID="6n3-VB-wAz">
             <objects>
                 <viewController id="rgN-ZY-g00" customClass="ExperimentViewController" customModule="LostandFoundApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -140,7 +140,6 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mdu-Vw-MD2">
                                 <rect key="frame" x="-1" y="43" width="377" height="574"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellID2" id="lki-Gy-Y4d">
                                         <rect key="frame" x="0.0" y="28" width="377" height="43.5"/>
@@ -149,6 +148,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="377" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -166,7 +166,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="msV-FY-V7V"/>
                     </view>
-                    <navigationItem key="navigationItem" title="A-Z" id="9QD-Qz-CNp"/>
+                    <navigationItem key="navigationItem" title="Experiments" id="9QD-Qz-CNp"/>
                     <connections>
                         <outlet property="tableview" destination="mdu-Vw-MD2" id="fd0-33-3ii"/>
                     </connections>
