@@ -12,13 +12,24 @@ class MapViewController: UIViewController{
 
    
     @IBOutlet var mapView: MKMapView!
-    
+    let locationManager = CLLocationManager()
     @IBOutlet var longPress: UILongPressGestureRecognizer!
     var loc:String!
     override func viewDidLoad() {
         super.viewDidLoad()
-        let locationManager = CLLocationManager()
+        self.mapView.showsUserLocation=true
+        self.locationManager.requestAlwaysAuthorization()
+
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+
+        if CLLocationManager.locationServicesEnabled() {
+            
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
         let userLocation = locationManager.location?.coordinate
+        
         setMapFocus(location: userLocation, radiusInKm: 250)
         
         

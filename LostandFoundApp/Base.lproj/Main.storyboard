@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="B63-8v-B7u">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="B63-8v-B7u">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -133,27 +133,43 @@
         <!--A-Z-->
         <scene sceneID="6n3-VB-wAz">
             <objects>
-                <viewController id="rgN-ZY-g00" sceneMemberID="viewController">
+                <viewController id="rgN-ZY-g00" customClass="ExperimentViewController" customModule="LostandFoundApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="B3S-MD-uqY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="This view will sort animals alphabetically" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qC6-Gg-mWd">
-                                <rect key="frame" x="0.0" y="150" width="376" height="34"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mdu-Vw-MD2">
+                                <rect key="frame" x="-1" y="43" width="377" height="574"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellID2" id="lki-Gy-Y4d">
+                                        <rect key="frame" x="0.0" y="28" width="377" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lki-Gy-Y4d" id="T6F-6r-o5B">
+                                            <rect key="frame" x="0.0" y="0.0" width="377" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="rgN-ZY-g00" id="Wp1-R6-kBP"/>
+                                    <outlet property="delegate" destination="rgN-ZY-g00" id="GIR-8Y-Phu"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="qC6-Gg-mWd" firstAttribute="centerX" secondItem="B3S-MD-uqY" secondAttribute="centerX" id="2nf-RA-6yo"/>
-                            <constraint firstItem="qC6-Gg-mWd" firstAttribute="leading" secondItem="msV-FY-V7V" secondAttribute="leading" id="lWT-q0-tnw"/>
-                            <constraint firstItem="qC6-Gg-mWd" firstAttribute="top" secondItem="msV-FY-V7V" secondAttribute="top" constant="106" id="p1Z-bC-aCe"/>
+                            <constraint firstItem="mdu-Vw-MD2" firstAttribute="top" secondItem="B3S-MD-uqY" secondAttribute="topMargin" constant="-1" id="1eu-cK-xO9"/>
+                            <constraint firstItem="mdu-Vw-MD2" firstAttribute="leading" secondItem="B3S-MD-uqY" secondAttribute="leadingMargin" constant="-17" id="4AP-dF-qny"/>
+                            <constraint firstItem="mdu-Vw-MD2" firstAttribute="centerX" secondItem="B3S-MD-uqY" secondAttribute="centerX" id="JY6-Qu-0Kb"/>
+                            <constraint firstItem="msV-FY-V7V" firstAttribute="bottom" secondItem="mdu-Vw-MD2" secondAttribute="bottom" constant="1" id="YS0-tg-n6D"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="msV-FY-V7V"/>
                     </view>
                     <navigationItem key="navigationItem" title="A-Z" id="9QD-Qz-CNp"/>
+                    <connections>
+                        <outlet property="tableview" destination="mdu-Vw-MD2" id="fd0-33-3ii"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="huw-Pw-76a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -183,12 +199,12 @@
         <!--Map-->
         <scene sceneID="6BM-r4-myq">
             <objects>
-                <viewController id="fF3-JE-DQh" customClass="MapViewController" customModule="LostandFoundApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fF3-JE-DQh" customClass="MapViewController" customModule="LostandFoundApp" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hDH-yS-Gl7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mKR-M3-u4Y">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" showsScale="YES" showsTraffic="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mKR-M3-u4Y">
                                 <rect key="frame" x="0.0" y="1" width="375" height="665"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -243,8 +259,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="folder" catalog="system" width="64" height="46"/>
-        <image name="map" catalog="system" width="64" height="56"/>
-        <image name="questionmark.circle" catalog="system" width="64" height="60"/>
+        <image name="folder" catalog="system" width="128" height="95"/>
+        <image name="map" catalog="system" width="128" height="113"/>
+        <image name="questionmark.circle" catalog="system" width="128" height="121"/>
     </resources>
 </document>
