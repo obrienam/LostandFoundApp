@@ -171,7 +171,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="huw-Pw-76a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3671.1999999999998" y="927.88605697151434"/>
+            <point key="canvasLocation" x="2137" y="945"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="3IQ-97-ubX">
@@ -234,7 +234,7 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="549.60000000000002" y="899.10044977511257"/>
+            <point key="canvasLocation" x="148" y="957"/>
         </scene>
         <!--Experiment-->
         <scene sceneID="WQd-wS-IKd">
@@ -253,7 +253,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ful-BD-fwy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2732" y="927.88605697151434"/>
+            <point key="canvasLocation" x="1162" y="943"/>
         </scene>
     </scenes>
     <resources>

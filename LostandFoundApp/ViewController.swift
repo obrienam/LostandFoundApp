@@ -12,6 +12,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var pressed=false
     var selectedItem=""
     var firstLocation=""
+    var table=[[String(),String()]]
     var petArray = [["Mammal", "cat", "dog", "hamster", "gerbil", "rabbit"], ["Bird", "parakeet", "parrot", "canary", "finch"], ["Fish", "tropical fish", "goldfish", "sea horses"], ["Reptile", "turtle", "snake", "lizard"]]
     @IBOutlet var petTable: UITableView!
     @IBOutlet var eButton: UIBarButtonItem!
@@ -20,6 +21,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Do any additional setup after loading the view.
         
     }
+    
     @IBAction func editButton(_ sender: UIBarButtonItem) {
         petTable.setEditing(!petTable.isEditing, animated: true)
         if petTable.isEditing == true{
