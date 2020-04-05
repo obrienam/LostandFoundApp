@@ -11,64 +11,94 @@ import MapKit
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     var pressed=false
     var selectedItem=""
+    var selectedRow:Int!
     var firstLocation=""
     var table=[[String(),String()]]
+    let defaults = UserDefaults.standard
     var petArray = [["Mammal", "cat", "dog", "hamster", "gerbil", "rabbit"], ["Bird", "parakeet", "parrot", "canary", "finch"], ["Fish", "tropical fish", "goldfish", "sea horses"], ["Reptile", "turtle", "snake", "lizard"]]
+    var testNames = [String]()
+    var testDetails = [[Double]]()
     @IBOutlet var petTable: UITableView!
     @IBOutlet var eButton: UIBarButtonItem!
+    var isLoadedFirstTime = false
     override func viewDidLoad() {
         super.viewDidLoad()
+        makeDefault()
         // Do any additional setup after loading the view.
+        let dictionary = defaults.object(forKey: "TestDict") as? [String:Any]
+        let size = (dictionary?.count ?? 3) as Int
+        for i in 1...size {
+            let array = dictionary?["LostItem\(i)"] as? [String:Any]
+            let val = array?["Name"] ?? "Blah"
+            testNames.append(val as! String)
+            let loc = array?["Location"]
+            
+            testDetails.append(loc as! [Double])
+            print(testDetails[i-1])
+        }
+        isLoadedFirstTime = true
         
+        
+
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        if !isLoadedFirstTime {
+            super.viewDidAppear(animated)
+            let dictionary = defaults.object(forKey: "TestDict") as? [String:Any]
+            let size = (dictionary?.count ?? 3) as Int
+            for i in 0...size-1 {
+                if i < size-1 || size == testNames.count {
+                    continue
+                }
+                else {
+                    let array = dictionary?["LostItem\(i+1)"] as? [String:Any]
+                    let val = array?["Name"] ?? "Blah"
+                    testNames.append(val as! String)
+                    let loc = array?["Location"]
+                    
+                    testDetails.append(loc as! [Double])
+                    print(testDetails[i-1])
+                }
+                petTable.reloadData()
+            }
+            
+        }
+        isLoadedFirstTime = false
     }
     
-    @IBAction func editButton(_ sender: UIBarButtonItem) {
-        petTable.setEditing(!petTable.isEditing, animated: true)
-        if petTable.isEditing == true{
-            eButton.title="Done"
-        }
-        else{
-            eButton.title="Edit"
-        }
-    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return petArray[section].count-1
+        return testNames.count
+      
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "cellID")
         if (cell==nil) {
             cell=UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cellID")
         }
-        cell?.textLabel?.text=petArray[indexPath.section][indexPath.row + 1]
+        cell?.textLabel?.text=testNames[indexPath.row]
         return cell!
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedItem = petArray[indexPath.section][indexPath.row + 1]
+        selectedItem = testNames[indexPath.row]
+        selectedRow=indexPath.row
         performSegue(withIdentifier: "detailLink", sender: self)
         
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let nextVC = segue.destination as! DetailViewController
-        nextVC.navigationItem.title = "\(selectedItem) Details"
-        nextVC.detailString="You selected a \(selectedItem) as your pet"
-        nextVC.animal="\(selectedItem)"
+        if segue.identifier=="detailLink"{
+            let nextVC = segue.destination as! DetailViewController
+            
+            nextVC.navigationItem.title = "\(selectedItem) Details"
+            nextVC.detailString="\(selectedItem)"
+            nextVC.loclist=testDetails[selectedRow]
+        }
+        
     }
 
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return petArray.count
-    }
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return petArray[section][0]
-    }
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let movedObject = petArray[sourceIndexPath.section][sourceIndexPath.row + 1]
-        petArray[sourceIndexPath.section].remove(at: sourceIndexPath.row + 1)
-        petArray[sourceIndexPath.section].insert(movedObject, at: destinationIndexPath.row + 1)
-    }
-    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
+    
+    
+    
     func displayAlert(section:Int, location: Int) {
         let alert = UIAlertController(title: "Add", message: "New Pet", preferredStyle: .alert)
         
@@ -101,11 +131,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete"){
             (contextualAction,view,boolValue) in
-            self.petArray[indexPath.section].remove(at: indexPath.row+1)
+            self.petArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
         }
         let swipeAction=UISwipeActionsConfiguration(actions:[deleteAction])
         return swipeAction
+    }
+    @IBAction func addItem(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "inputLink", sender: self)
+        
+    }
+    func makeDefault(){
+        
+        let dict = ["LostItem1":["Name":"Wallet","Location":[35.136802,-80.824279]],
+                    "LostItem2":["Name":"Phone","Location":[35.136399,-80.824924]],
+                    "LostItem3":["Name":"Keys","Location":[35.136399,-80.818847]]]
+        defaults.set(dict,forKey: "TestDict")
     }
     
 }

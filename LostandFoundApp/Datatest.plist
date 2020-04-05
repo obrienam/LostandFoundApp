@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<array/>
+<dict>
+	<key>LostItem1</key>
+	<array>
+		<string>Wallet</string>
+		<array>
+			<real>35.136802</real>
+			<real>-80.824279</real>
+		</array>
+	</array>
+	<key>LostItem2</key>
+	<array>
+		<string>Phone</string>
+		<array>
+			<real>35.136399</real>
+			<real>-80.824924</real>
+		</array>
+	</array>
+	<key>LostItem3</key>
+	<array>
+		<string>Keys</string>
+		<array>
+			<real>35.136399</real>
+			<real>-80.81884700000001</real>
+		</array>
+	</array>
+</dict>
 </plist>

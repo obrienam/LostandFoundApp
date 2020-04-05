@@ -12,17 +12,22 @@ import MapKit
 class DetailViewController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet var btnText: UIBarButtonItem!
     var animal="placeholder"
-    @IBOutlet var detailLabel: UITextField!
+    var pin:Artwork!
+    @IBOutlet var mapView: MKMapView!
+    @IBOutlet var itemName: UILabel!
     var detailString: String!
     var locationManager: CLLocationManager?
+    var loclist = [Double]()
     var loc:String!
+    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        detailLabel.isUserInteractionEnabled=false
-        detailLabel?.text=detailString
+        //detailLabel.isUserInteractionEnabled=false
+        //detailLabel?.text=detailString
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil); NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard)); view.addGestureRecognizer(tap)
+        itemName.text=detailString
         locationManager = CLLocationManager()
         
         
@@ -32,9 +37,31 @@ class DetailViewController: UIViewController,CLLocationManagerDelegate {
             locationManager?.delegate = self
             locationManager?.desiredAccuracy=kCLLocationAccuracyNearestTenMeters
             locationManager?.startUpdatingLocation()
+            let itemLocation = CLLocationCoordinate2D(latitude: loclist[0] , longitude: loclist[1])
+            
+            setMapFocus(location: itemLocation, radiusInKm: 100)
+            addAnnotation()
         }
+        let savedict=defaults.object(forKey: "TestDict") as? [String: String] ?? [String: String]()
+               print(savedict["LostItem1"] ?? "Blah")
         // Do any additional setup after loading the view.
     }
+    
+    func setMapFocus(location: CLLocationCoordinate2D?, radiusInKm radius: CLLocationDistance) {
+        
+        
+        let region: MKCoordinateRegion = MKCoordinateRegion(center: location! ,latitudinalMeters: radius,longitudinalMeters: radius)
+        self.mapView.setRegion(region, animated: false)
+    }
+    func addAnnotation(){
+        
+        let artwork = Artwork(title: "\(itemName.text ?? "Item")", locationName: "Place", discipline: "Location", coordinate: CLLocationCoordinate2D(latitude: loclist[0] as! CLLocationDegrees, longitude: loclist[1] as! CLLocationDegrees))
+        pin=artwork
+        self.mapView.addAnnotation(artwork)
+        
+        
+    }
+    /*
     @IBAction func editButton(_ sender: UIBarButtonItem) {
         if detailLabel.isUserInteractionEnabled{
         detailLabel.isUserInteractionEnabled=false
@@ -63,6 +90,7 @@ class DetailViewController: UIViewController,CLLocationManagerDelegate {
        
         self.present(alert,animated: true, completion: nil)
     }
+ */
     func convertLoc(location: CLPlacemark?) -> String?{
         return location?.name
     }

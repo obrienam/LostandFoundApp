@@ -18,10 +18,11 @@ class ExperimentViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet var tableview: UITableView!
     var langs:languages!
     var langtable=[[String(),String()]]
+    /*
     var plistURL : URL {
         let documentDirectoryURL =  try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
         return documentDirectoryURL.appendingPathComponent("../../../Users/aidanobrien/Documents/GitHub/LostandFoundApp/LostandFoundApp/Datatest.plist")
-    }
+    }*/
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,21 +76,6 @@ class ExperimentViewController: UIViewController, UITableViewDelegate, UITableVi
         
         
         // Do any additional setup after loading the view.
-    }
-    func savePropertyList(_ plist: Any) throws
-    {
-        let plistData = try PropertyListSerialization.data(fromPropertyList: plist, format: .xml, options: 0)
-        try plistData.write(to: plistURL)
-    }
-
-
-    func loadPropertyList() throws -> [String:String]
-    {
-        let data = try Data(contentsOf: plistURL)
-        guard let plist = try PropertyListSerialization.propertyList(from: data, format: nil) as? [String:String] else {
-            return [:]
-        }
-        return plist
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -15,6 +15,12 @@ class MapViewController: UIViewController{
     let locationManager = CLLocationManager()
     @IBOutlet var longPress: UILongPressGestureRecognizer!
     var loc:String!
+    var loclist:NSArray!
+    var testNames = [String]()
+    var testDetails = [[Double]]()
+    var pins=[Artwork]()
+    let defaults = UserDefaults.standard
+    var isLoadedFirstTime = false
     override func viewDidLoad() {
         super.viewDidLoad()
         self.mapView.showsUserLocation=true
@@ -30,23 +36,66 @@ class MapViewController: UIViewController{
         }
         let userLocation = locationManager.location?.coordinate
         
-        setMapFocus(location: userLocation, radiusInKm: 250)
-        
-        
-        
+        setMapFocus(location: userLocation, radiusInKm: 500)
+        let dictionary = defaults.object(forKey: "TestDict") as? [String:Any]
+        let size = (dictionary?.count ?? 3) as Int
+        for i in 0...size-1 {
+            let array = dictionary?["LostItem\(i+1)"] as? [String:Any]
+            let val = array?["Name"] ?? "Blah"
+            testNames.append(val as! String)
+            let loc = array?["Location"]
+            
+            testDetails.append(loc as! [Double])
+            
+        }
+        addAnnotations()
+        isLoadedFirstTime=true
         
         
         
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if !isLoadedFirstTime {
+            
+            let dictionary = defaults.object(forKey: "TestDict") as? [String:Any]
+            let size = (dictionary?.count ?? 3) as Int
+            if size > testNames.count {
+                mapView.removeAnnotations(pins)
+                for i in 0...size-1 {
+                    if i < size-1 {
+                        continue
+                    }
+                    else {
+                        let array = dictionary?["LostItem\(i+1)"] as? [String:Any]
+                        let val = array?["Name"] ?? "Blah"
+                        testNames.append(val as! String)
+                        let loc = array?["Location"]
+                        
+                        testDetails.append(loc as! [Double])
+                        print(testDetails[i-1])
+                    }
+                }
+                addAnnotations()
+            }
+        }
+        isLoadedFirstTime=false
+    }
     func setMapFocus(location: CLLocationCoordinate2D?, radiusInKm radius: CLLocationDistance) {
         
         
         let region: MKCoordinateRegion = MKCoordinateRegion(center: location! ,latitudinalMeters: radius,longitudinalMeters: radius)
         self.mapView.setRegion(region, animated: false)
     }
-    
+    func addAnnotations() {
+        for i in 0...testNames.count-1 {
+            let artwork = Artwork(title: "\(testNames[i])", locationName: "Place", discipline: "Location", coordinate: CLLocationCoordinate2D(latitude: testDetails[i][0], longitude: testDetails[i][1]))
+            pins.append(artwork)
+            self.mapView.addAnnotation(artwork)
+        }
+    }
+    /*
     @IBAction func longDetected(_ sender: UILongPressGestureRecognizer) {
         
         
@@ -82,6 +131,7 @@ class MapViewController: UIViewController{
         
         
     }
+ */
     /*
     // MARK: - Navigation
 
