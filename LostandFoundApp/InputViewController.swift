@@ -19,7 +19,8 @@ class InputViewController: UIViewController, UITextFieldDelegate {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard)); view.addGestureRecognizer(tap)
         nameField.delegate=self
         locField.delegate=self
-        
+        nameField.center.x = self.view.center.x
+        locField.center.x = self.view.center.x
         
         // Do any additional setup after loading the view.
     }
