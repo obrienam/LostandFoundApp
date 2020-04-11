@@ -12,6 +12,8 @@ import MapKit
 class DetailViewController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet var btnText: UIBarButtonItem!
     var animal="placeholder"
+    @IBOutlet var dateString: UILabel!
+    @IBOutlet var thumnail: UIImageView!
     var pin:Artwork!
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var itemName: UILabel!
@@ -19,6 +21,8 @@ class DetailViewController: UIViewController,CLLocationManagerDelegate {
     var locationManager: CLLocationManager?
     var loclist = [Double]()
     var loc:String!
+    var date:String!
+    var im:UIImage!
     let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
@@ -42,6 +46,11 @@ class DetailViewController: UIViewController,CLLocationManagerDelegate {
             setMapFocus(location: itemLocation, radiusInKm: 100)
             addAnnotation()
         }
+        thumnail.image=im
+        thumnail.layer.cornerRadius=8.0
+        thumnail.transform = thumnail.transform.rotated(by: CGFloat(Double.pi / 2))
+        
+        dateString.text=date
         let savedict=defaults.object(forKey: "TestDict") as? [String: String] ?? [String: String]()
                print(savedict["LostItem1"] ?? "Blah")
         // Do any additional setup after loading the view.

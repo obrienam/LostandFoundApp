@@ -9,23 +9,42 @@ import Foundation
 import UIKit
 import MapKit
 class InputViewController: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,
-UINavigationControllerDelegate {
+UINavigationControllerDelegate, CLLocationManagerDelegate {
 
     @IBOutlet var nameField: UITextField!
     @IBOutlet var locField: UITextField!
     @IBOutlet var imagePicked: UIImageView!
     @IBOutlet var photoButton: UIButton!
+    @IBOutlet var dateField: UITextField!
+    var loc:String!
+    var times=0
+    var locationManager: CLLocationManager?
     let currentDirectoryPath = FileManager.default.currentDirectoryPath
     var im: UIImage!
     override func viewDidLoad() {
         super.viewDidLoad()
+        dateField.setInputViewDatePicker(target: self, selector: #selector(tapDone)) //1
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil); NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard)); view.addGestureRecognizer(tap)
         nameField.delegate=self
         locField.delegate=self
         nameField.center.x = self.view.center.x
         locField.center.x = self.view.center.x
+        let cdate = Date()
+        let dateformatter = DateFormatter() // 2-2
+        dateformatter.dateStyle = .medium // 2-3
         
+        self.dateField.text = dateformatter.string(from: cdate)
+        locationManager = CLLocationManager()
+        
+        
+        locationManager?.requestAlwaysAuthorization()
+        locationManager?.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager?.delegate = self
+            locationManager?.desiredAccuracy=kCLLocationAccuracyNearestTenMeters
+           
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -49,13 +68,13 @@ UINavigationControllerDelegate {
                     let defaults = UserDefaults.standard
                     var dictionary = defaults.object(forKey: "TestDict") as? [String:Any]
                     let size = (dictionary?.count ?? 3) as Int
-                    let item = ["LostItem\(size+1)":["Name":"\(self.nameField?.text ?? "Blah")","Location":[location.coordinate.latitude,location.coordinate.longitude]]]
+                    let item = ["LostItem\(size+1)":["Name":"\(self.nameField?.text ?? "Blah")","Location":[location.coordinate.latitude,location.coordinate.longitude],"Date":self.dateField.text ?? "Blah"]]
                     dictionary?.merge(item){(current, _) in current}
                     defaults.set(dictionary,forKey:"TestDict")
                     var images=defaults.object(forKey: "TestIcons") as? [Data]
                     let pic:Data
                     if(self.im==nil) {
-                        pic = UIImage(named: "icon")!.pngData()!
+                        pic = UIImage(named: "pic")!.pngData()!
                     }
                     else {
                         pic = self.im.pngData()!
@@ -138,6 +157,7 @@ UINavigationControllerDelegate {
     
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        
         imagePicked.image=image
         im = image
             //save image
@@ -157,5 +177,44 @@ UINavigationControllerDelegate {
                    
                }
     }
-    
+    @objc func tapDone(_ sender: Any) {
+        if let datePicker = self.dateField.inputView as? UIDatePicker { // 2-1
+            let dateformatter = DateFormatter() // 2-2
+            dateformatter.dateStyle = .medium // 2-3
+            self.dateField.text = dateformatter.string(from: datePicker.date) //2-4
+        }
+        self.dateField.resignFirstResponder() // 2-5
+    }
+    @IBAction func fillLocation(_ sender: UIButton) {
+      
+        self.locationManager?.startUpdatingLocation()
+        
+        
+     
+        
+    }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("blah")
+        if let location = locations.last {
+            let geocoder = CLGeocoder()
+                
+            // Look up the location and pass it to the completion handler
+            geocoder.reverseGeocodeLocation(location,
+                        completionHandler: { (placemarks, error) in
+                if error == nil {
+                    let firstLocation = placemarks?[0]
+                    self.loc=firstLocation?.name
+                    self.locField.text=self.loc
+                    self.locationManager?.stopUpdatingLocation()
+                }
+                else {
+                 // An error occurred during geocoding.
+                    self.loc="None"
+                    self.locField.text=self.loc
+                    self.locationManager?.stopUpdatingLocation()
+                }
+            })
+        }
+    }
+   
 }

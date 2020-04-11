@@ -17,7 +17,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let defaults = UserDefaults.standard
     var petArray = [["Mammal", "cat", "dog", "hamster", "gerbil", "rabbit"], ["Bird", "parakeet", "parrot", "canary", "finch"], ["Fish", "tropical fish", "goldfish", "sea horses"], ["Reptile", "turtle", "snake", "lizard"]]
     var testNames = [String]()
+    var testDates = [String]()
     var testDetails = [[Double]]()
+ 
     @IBOutlet var petTable: UITableView!
     @IBOutlet var eButton: UIBarButtonItem!
     var isLoadedFirstTime = false
@@ -30,7 +32,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         for i in 1...size {
             let array = dictionary?["LostItem\(i)"] as? [String:Any]
             let val = array?["Name"] ?? "Blah"
+            let date = array?["Date"] ?? "Blah"
             testNames.append(val as! String)
+            testDates.append(date as! String)
             let loc = array?["Location"]
             
             testDetails.append(loc as! [Double])
@@ -45,6 +49,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if !isLoadedFirstTime {
             super.viewDidAppear(animated)
             let dictionary = defaults.object(forKey: "TestDict") as? [String:Any]
+         
             let size = (dictionary?.count ?? 3) as Int
             for i in 0...size-1 {
                 if i < size-1 || size == testNames.count {
@@ -53,7 +58,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 else {
                     let array = dictionary?["LostItem\(i+1)"] as? [String:Any]
                     let val = array?["Name"] ?? "Blah"
+                    let date = array?["Date"] ?? "Blah"
+                
+                   
                     testNames.append(val as! String)
+                    testDates.append(date as! String)
                     let loc = array?["Location"]
                     
                     testDetails.append(loc as! [Double])
@@ -71,18 +80,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
       
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "cellID")
-        if (cell==nil) {
-            cell=UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cellID")
-        }
-        cell?.textLabel?.text=testNames[indexPath.row]
-        let images=defaults.object(forKey: "TestIcons") as? [Data]
-        let im = UIImage(data: images![indexPath.row])
+        var cell = tableView.dequeueReusableCell(withIdentifier: "cellID") as! TableViewCell
+        
+        cell.titleLabel?.text=testNames[indexPath.row]
         
         
-        cell?.imageView?.layer.frame=CGRect(x: 0,y: 0,width: 100,height: 100)
-        cell?.imageView?.image=UIImage(data: images![indexPath.row])
-        return cell!
+        
+        cell.detailLabel?.text=testDates[indexPath.row]
+        
+        return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedItem = testNames[indexPath.row]
@@ -98,6 +104,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             nextVC.navigationItem.title = "\(selectedItem) Details"
             nextVC.detailString="\(selectedItem)"
             nextVC.loclist=testDetails[selectedRow]
+            nextVC.date=testDates[selectedRow]
+            let images=defaults.object(forKey: "TestIcons") as! [Data]
+            
+            let thumb = UIImage(data: images[selectedRow])
+            nextVC.im=thumb
         }
         
     }
@@ -149,15 +160,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func makeDefault(){
-        let image = UIImage(named:"icon")
+        let image = UIImage(named:"pic")
         let imageData = (image?.pngData())
         var logoImages = [Data]()
         for i in 0...2 {
             logoImages.append(imageData!)
         }
-        let dict = ["LostItem1":["Name":"Wallet","Location":[35.136802,-80.824279]],
-                    "LostItem2":["Name":"Phone","Location":[35.136399,-80.824924]],
-                    "LostItem3":["Name":"Keys","Location":[35.136399,-80.818847]]]
+        let dict = ["LostItem1":["Name":"Wallet","Location":[35.136802,-80.824279],"Date":"April 11, 2020"],
+                    "LostItem2":["Name":"Phone","Location":[35.136399,-80.824924],"Date":"April 11, 2020"],
+                    "LostItem3":["Name":"Keys","Location":[35.136399,-80.818847],"Date":"April 11, 2020"]]
         defaults.set(logoImages,forKey:"TestIcons")
         defaults.set(dict,forKey: "TestDict")
     }
