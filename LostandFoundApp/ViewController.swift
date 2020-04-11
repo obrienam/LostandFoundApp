@@ -141,8 +141,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         performSegue(withIdentifier: "inputLink", sender: self)
         
     }
+    
     func makeDefault(){
-        
+        var image = UIImage(named:"icon")
         let dict = ["LostItem1":["Name":"Wallet","Location":[35.136802,-80.824279]],
                     "LostItem2":["Name":"Phone","Location":[35.136399,-80.824924]],
                     "LostItem3":["Name":"Keys","Location":[35.136399,-80.818847]]]

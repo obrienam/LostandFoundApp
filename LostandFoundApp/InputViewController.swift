@@ -8,10 +8,13 @@
 import Foundation
 import UIKit
 import MapKit
-class InputViewController: UIViewController, UITextFieldDelegate {
+class InputViewController: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,
+UINavigationControllerDelegate {
 
     @IBOutlet var nameField: UITextField!
     @IBOutlet var locField: UITextField!
+    @IBOutlet var imagePicked: UIImageView!
+    @IBOutlet var photoButton: UIButton!
     let currentDirectoryPath = FileManager.default.currentDirectoryPath
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,6 +124,26 @@ class InputViewController: UIViewController, UITextFieldDelegate {
         
 
         return plistData
+    }
+    
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        imagePicked.image=image
+            //save image
+            //display image
+        photoButton.setTitle("Retake Photo", for: .normal)
+        print("blah")
+        self.dismiss(animated: true, completion: nil)
+    }
+    @IBAction func photoTake(_ sender: UIButton) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            imagePicked.layer.cornerRadius = 8.0
+                   let imagePicker = UIImagePickerController()
+                   imagePicker.delegate = self
+                   imagePicker.sourceType = .camera;
+                   imagePicker.allowsEditing = false
+                   self.present(imagePicker, animated: true, completion: nil)
+               }
     }
     
 }
