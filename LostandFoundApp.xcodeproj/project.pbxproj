@@ -18,7 +18,7 @@
 		B5A88209240DA75E00703C82 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A88208240DA75E00703C82 /* DetailViewController.swift */; };
 		B5C66EE12439292600117F71 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C66EE02439292600117F71 /* InputViewController.swift */; };
 		B5D712022427DC4D0017E164 /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D712012427DC4D0017E164 /* Artwork.swift */; };
-		B5DF29BA2441478B00B8FD5C /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B5DF29B92441478B00B8FD5C /* icon.png */; };
+		B5DF29C0244157C900B8FD5C /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B5DF29BF244157C900B8FD5C /* icon.png */; };
 		B5EF62B92430FF93001C9A75 /* ExperimentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EF62B82430FF93001C9A75 /* ExperimentViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +36,7 @@
 		B5A88208240DA75E00703C82 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		B5C66EE02439292600117F71 /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		B5D712012427DC4D0017E164 /* Artwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
-		B5DF29B92441478B00B8FD5C /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		B5DF29BF244157C900B8FD5C /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../../../Downloads/icon.png; sourceTree = "<group>"; };
 		B5EF62B82430FF93001C9A75 /* ExperimentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,10 +77,10 @@
 				B5C66EE02439292600117F71 /* InputViewController.swift */,
 				B5D712012427DC4D0017E164 /* Artwork.swift */,
 				B5064D652426A75F0063F001 /* MapViewController.swift */,
-				B5DF29B92441478B00B8FD5C /* icon.png */,
 				B5A88208240DA75E00703C82 /* DetailViewController.swift */,
 				B5EF62B82430FF93001C9A75 /* ExperimentViewController.swift */,
 				B51F75CD2402FEA5005B3DF6 /* LaunchScreen.storyboard */,
+				B5DF29BF244157C900B8FD5C /* icon.png */,
 				B52CB3B72432C2B8006F1D80 /* Datatest.plist */,
 				B51F75CB2402FEA5005B3DF6 /* Assets.xcassets */,
 				B51F75D02402FEA5005B3DF6 /* Info.plist */,
@@ -147,7 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B51F75CF2402FEA5005B3DF6 /* LaunchScreen.storyboard in Resources */,
-				B5DF29BA2441478B00B8FD5C /* icon.png in Resources */,
+				B5DF29C0244157C900B8FD5C /* icon.png in Resources */,
 				B51F75CC2402FEA5005B3DF6 /* Assets.xcassets in Resources */,
 				B52CB3B82432C2B8006F1D80 /* Datatest.plist in Resources */,
 				B51F75CA2402FEA2005B3DF6 /* Main.storyboard in Resources */,

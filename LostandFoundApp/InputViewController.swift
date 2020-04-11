@@ -16,6 +16,7 @@ UINavigationControllerDelegate {
     @IBOutlet var imagePicked: UIImageView!
     @IBOutlet var photoButton: UIButton!
     let currentDirectoryPath = FileManager.default.currentDirectoryPath
+    var im: UIImage!
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil); NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -51,7 +52,16 @@ UINavigationControllerDelegate {
                     let item = ["LostItem\(size+1)":["Name":"\(self.nameField?.text ?? "Blah")","Location":[location.coordinate.latitude,location.coordinate.longitude]]]
                     dictionary?.merge(item){(current, _) in current}
                     defaults.set(dictionary,forKey:"TestDict")
-                    
+                    var images=defaults.object(forKey: "TestIcons") as? [Data]
+                    let pic:Data
+                    if(self.im==nil) {
+                        pic = UIImage(named: "icon")!.pngData()!
+                    }
+                    else {
+                        pic = self.im.pngData()!
+                    }
+                    images?.append(pic)
+                    defaults.set(images,forKey:"TestIcons")
                     return
                 }
             }
@@ -129,6 +139,7 @@ UINavigationControllerDelegate {
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         imagePicked.image=image
+        im = image
             //save image
             //display image
         photoButton.setTitle("Retake Photo", for: .normal)
@@ -143,6 +154,7 @@ UINavigationControllerDelegate {
                    imagePicker.sourceType = .camera;
                    imagePicker.allowsEditing = false
                    self.present(imagePicker, animated: true, completion: nil)
+                   
                }
     }
     

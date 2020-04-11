@@ -76,6 +76,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell=UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cellID")
         }
         cell?.textLabel?.text=testNames[indexPath.row]
+        let images=defaults.object(forKey: "TestIcons") as? [Data]
+        let im = UIImage(data: images![indexPath.row])
+        
+        
+        cell?.imageView?.layer.frame=CGRect(x: 0,y: 0,width: 100,height: 100)
+        cell?.imageView?.image=UIImage(data: images![indexPath.row])
         return cell!
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -143,10 +149,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func makeDefault(){
-        var image = UIImage(named:"icon")
+        let image = UIImage(named:"icon")
+        let imageData = (image?.pngData())
+        var logoImages = [Data]()
+        for i in 0...2 {
+            logoImages.append(imageData!)
+        }
         let dict = ["LostItem1":["Name":"Wallet","Location":[35.136802,-80.824279]],
                     "LostItem2":["Name":"Phone","Location":[35.136399,-80.824924]],
                     "LostItem3":["Name":"Keys","Location":[35.136399,-80.818847]]]
+        defaults.set(logoImages,forKey:"TestIcons")
         defaults.set(dict,forKey: "TestDict")
     }
     
