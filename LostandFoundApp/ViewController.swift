@@ -105,7 +105,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             nextVC.detailString="\(selectedItem)"
             nextVC.loclist=testDetails[selectedRow]
             nextVC.date=testDates[selectedRow]
-            let images=defaults.object(forKey: "TestIcons") as! [Data]
+            let images=defaults.object(forKey: "TestImages") as! [Data]
             
             let thumb = UIImage(data: images[selectedRow])
             nextVC.im=thumb
@@ -163,13 +163,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let image = UIImage(named:"pic")
         let imageData = (image?.pngData())
         var logoImages = [Data]()
+        var detImages = [Data]()
         for i in 0...2 {
             logoImages.append(imageData!)
+            detImages.append(imageData!)
         }
         let dict = ["LostItem1":["Name":"Wallet","Location":[35.136802,-80.824279],"Date":"April 11, 2020"],
                     "LostItem2":["Name":"Phone","Location":[35.136399,-80.824924],"Date":"April 11, 2020"],
                     "LostItem3":["Name":"Keys","Location":[35.136399,-80.818847],"Date":"April 11, 2020"]]
         defaults.set(logoImages,forKey:"TestIcons")
+        defaults.set(detImages,forKey:"TestImages")
         defaults.set(dict,forKey: "TestDict")
     }
     

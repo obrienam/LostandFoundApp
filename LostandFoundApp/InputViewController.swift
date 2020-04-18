@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 import MapKit
-class InputViewController: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,
+class InputViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate, CLLocationManagerDelegate {
 
     @IBOutlet var nameField: UITextField!
@@ -20,11 +20,15 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
     @IBOutlet var photoButton2: UIButton!
     @IBOutlet var subButton: UIButton!
     @IBOutlet var detailField: UITextView!
+    @IBOutlet var imagePicked2: UIImageView!
+    var b1 = false
+    var b2 = false
     var loc:String!
     var times=0
     var locationManager: CLLocationManager?
     let currentDirectoryPath = FileManager.default.currentDirectoryPath
     var im: UIImage!
+    var im2: UIImage!
     override func viewDidLoad() {
         super.viewDidLoad()
         dateField.setInputViewDatePicker(target: self, selector: #selector(tapDone)) //1
@@ -42,6 +46,11 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
         detailField.layer.cornerRadius = 8
         nameField.center.x = self.view.center.x
         locField.center.x = self.view.center.x
+        detailField.text="Description"
+        detailField.textColor=UIColor.lightGray
+        detailField.layer.borderWidth=1
+        detailField.layer.borderColor=UIColor.systemGray3.cgColor
+        detailField.delegate=self
         let cdate = Date()
         let dateformatter = DateFormatter() // 2-2
         dateformatter.dateStyle = .medium // 2-3
@@ -91,8 +100,18 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
                     else {
                         pic = self.im.pngData()!
                     }
+                    var dimages=defaults.object(forKey: "TestImages") as? [Data]
+                    let pic2:Data
+                    if(self.im2==nil) {
+                        pic2 = UIImage(named: "pic")!.pngData()!
+                    }
+                    else {
+                        pic2 = self.im2.pngData()!
+                    }
                     images?.append(pic)
                     defaults.set(images,forKey:"TestIcons")
+                    dimages?.append(pic2)
+                    defaults.set(dimages,forKey:"TestImages")
                     return
                 }
             }
@@ -114,6 +133,18 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
         
 
     }
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if detailField.textColor == UIColor.lightGray {
+            detailField.text = nil
+            detailField.textColor = UIColor.black
+        }
+    }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if detailField.text.isEmpty {
+            detailField.text = "Description"
+            detailField.textColor = UIColor.lightGray
+        }
+    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let nextTag = textField.tag + 1
 
@@ -125,69 +156,49 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
 
         return true
     }
-    func writePlistFile(withData data: NSDictionary, atPath path: String) -> Bool {
-       
-       
-            let docsBaseURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            let customPlistURL = docsBaseURL.appendingPathComponent("Datatest.plist")
-            return NSDictionary(dictionary: data).write(to: customPlistURL, atomically: true)
-            
-
-            
-
-        
-        
-       
-       
-        
-            
-        
-        
-        
-        //return data.write(toFile: Bundle.main.path(forResource: "Datatest", ofType: "plist") ?? "none", atomically: false)
-        
-
-        
-    }
-    func readPlistFile(atPath path: String) -> [String : Any] {
-        var plistData: [String : Any] = [:]
-        
-        guard let plistFileData = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Datatest", ofType: "plist")!) else {
-            print("File doesn't exist")
-            return plistData
-        }
-
-        
-            plistData = plistFileData as! [String : Any]
-     
-        
-            
-        
-
-        return plistData
-    }
+   
     
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-        
-        imagePicked.image=image
-        im = image
-            //save image
-            //display image
-        photoButton.setTitle("Retake Photo", for: .normal)
-        print("blah")
-        self.dismiss(animated: true, completion: nil)
+        if b1 == true {
+            imagePicked.image=image
+            im = image
+                //save image
+                //display image
+            photoButton.setTitle("Retake Item Photo", for: .normal)
+            b1=false
+            self.dismiss(animated: true, completion: nil)
+        }
+        else if b2 == true {
+            imagePicked2.image=image
+            im2 = image
+                //save image
+                //display image
+            photoButton2.setTitle("Retake Detail Photo", for: .normal)
+            b2=false
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     @IBAction func photoTake(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            imagePicked.layer.cornerRadius = 8.0
+            if sender.titleLabel?.text == "Take Item Photo" || sender.titleLabel?.text == "Retake Item Photo" {
+                   imagePicked.layer.cornerRadius = 8.0
+                   b1=true
                    let imagePicker = UIImagePickerController()
                    imagePicker.delegate = self
                    imagePicker.sourceType = .camera;
                    imagePicker.allowsEditing = false
                    self.present(imagePicker, animated: true, completion: nil)
-                   
-               }
+                }
+            else if sender.titleLabel?.text == "Take Detail Photo" || sender.titleLabel?.text == "Retake Detail Photo"{
+                   imagePicked2.layer.cornerRadius = 8.0
+                   b2=true
+                   let imagePicker = UIImagePickerController()
+                   imagePicker.delegate = self
+                   imagePicker.sourceType = .camera;
+                   imagePicker.allowsEditing = false
+                   self.present(imagePicker, animated: true, completion: nil)                }
+            }
     }
     @objc func tapDone(_ sender: Any) {
         if let datePicker = self.dateField.inputView as? UIDatePicker { // 2-1
