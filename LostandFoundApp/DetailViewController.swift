@@ -130,7 +130,7 @@ class DetailViewController: UIViewController,CLLocationManagerDelegate {
         defaults.set(logos,forKey:"TestIcons")
         defaults.set(images,forKey:"TestImages")
         defaults.set(dictionary,forKey: "TestDict")
-        self.tableViewController?.onUserAction(ind: self.ind)
+  
         _ = navigationController?.popViewController(animated: true)
     }
     

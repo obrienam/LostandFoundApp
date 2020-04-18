@@ -257,6 +257,14 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
      
         
     }
+    @IBAction func descInfo(_ sender: Any) {
+        let alert = UIAlertController(title: "Item Description", message: "Here you can input a desiption for the item, such as color or size.", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
+
+        self.present(alert, animated: true)
+    }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("blah")
         if let location = locations.last {

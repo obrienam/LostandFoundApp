@@ -106,13 +106,18 @@
                                     <action selector="submitButton:" destination="1jt-54-rmQ" eventType="touchUpInside" id="jRW-rI-3ka"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AgQ-F3-lOk">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AgQ-F3-lOk">
                                 <rect key="frame" x="308" y="262" width="47" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="47" id="DbQ-PG-SVA"/>
                                     <constraint firstAttribute="height" constant="46" id="NLd-Va-d3K"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="questionmark.circle" catalog="system"/>
+                                <state key="normal" image="questionmark.circle" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                </state>
+                                <connections>
+                                    <action selector="descInfo:" destination="1jt-54-rmQ" eventType="touchUpInside" id="lbm-S3-hEV"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -300,9 +305,6 @@
                                 <rect key="frame" x="276" y="7" width="83" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Claim"/>
-                                <connections>
-                                    <action selector="claimButton:" destination="kLr-AP-sgr" eventType="touchUpInside" id="jNT-n9-H9N"/>
-                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>

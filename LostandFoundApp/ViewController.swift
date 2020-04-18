@@ -14,6 +14,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var selectedRow:Int!
     var firstLocation=""
     var table=[[String(),String()]]
+   
     let defaults = UserDefaults.standard
     var petArray = [["Mammal", "cat", "dog", "hamster", "gerbil", "rabbit"], ["Bird", "parakeet", "parrot", "canary", "finch"], ["Fish", "tropical fish", "goldfish", "sea horses"], ["Reptile", "turtle", "snake", "lizard"]]
     var testNames = [String]()
@@ -109,14 +110,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         
         
+        let images=defaults.object(forKey: "TestIcons") as! [Data]
+        
+        let thumb = UIImage(data: images[indexPath.row])
+        print(images.count)
+        
+        cell.thumbnail?.image=thumb
+        cell.thumbnail?.transform = cell.thumbnail.transform.rotated(by: CGFloat(Double.pi / 2))
         cell.detailLabel?.text=testDates[indexPath.row]
         
         return cell
     }
-    func onUserAction(ind:Int){
-        print("blah7")
-        self.toRemove=ind
-    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedItem = testNames[indexPath.row]
         selectedRow=indexPath.row

@@ -11,6 +11,7 @@ import UIKit
 class TableViewCell: UITableViewCell {
 
     
+    
     @IBOutlet var thumbnail: UIImageView!
     @IBOutlet var detailLabel: UILabel!
     @IBOutlet var titleLabel: UILabel!
