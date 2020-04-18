@@ -19,6 +19,7 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
     @IBOutlet var locButton: UIButton!
     @IBOutlet var photoButton2: UIButton!
     @IBOutlet var subButton: UIButton!
+    @IBOutlet var detailField: UITextView!
     var loc:String!
     var times=0
     var locationManager: CLLocationManager?
@@ -35,7 +36,10 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
         locButton.layer.cornerRadius = 8
         photoButton.layer.cornerRadius = 8
         photoButton2.layer.cornerRadius = 8
+        photoButton.titleLabel?.textAlignment = .center
+        photoButton2.titleLabel?.textAlignment = .center
         subButton.layer.cornerRadius = 8
+        detailField.layer.cornerRadius = 8
         nameField.center.x = self.view.center.x
         locField.center.x = self.view.center.x
         let cdate = Date()
