@@ -18,6 +18,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var petArray = [["Mammal", "cat", "dog", "hamster", "gerbil", "rabbit"], ["Bird", "parakeet", "parrot", "canary", "finch"], ["Fish", "tropical fish", "goldfish", "sea horses"], ["Reptile", "turtle", "snake", "lizard"]]
     var testNames = [String]()
     var testDates = [String]()
+    var testDesc = [String]()
     var testDetails = [[Double]]()
  
     @IBOutlet var petTable: UITableView!
@@ -33,8 +34,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let array = dictionary?["LostItem\(i)"] as? [String:Any]
             let val = array?["Name"] ?? "Blah"
             let date = array?["Date"] ?? "Blah"
+            let desc = array?["Description"] ?? "Blah"
             testNames.append(val as! String)
             testDates.append(date as! String)
+            testDesc.append(desc as! String)
             let loc = array?["Location"]
             
             testDetails.append(loc as! [Double])
@@ -59,10 +62,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     let array = dictionary?["LostItem\(i+1)"] as? [String:Any]
                     let val = array?["Name"] ?? "Blah"
                     let date = array?["Date"] ?? "Blah"
-                
+                    let desc = array?["Description"] ?? "Blah"
                    
                     testNames.append(val as! String)
                     testDates.append(date as! String)
+                    testDesc.append(desc as! String)
                     let loc = array?["Location"]
                     
                     testDetails.append(loc as! [Double])
@@ -105,6 +109,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             nextVC.detailString="\(selectedItem)"
             nextVC.loclist=testDetails[selectedRow]
             nextVC.date=testDates[selectedRow]
+            nextVC.desc=testDesc[selectedRow]
             let images=defaults.object(forKey: "TestImages") as! [Data]
             
             let thumb = UIImage(data: images[selectedRow])
@@ -168,9 +173,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             logoImages.append(imageData!)
             detImages.append(imageData!)
         }
-        let dict = ["LostItem1":["Name":"Wallet","Location":[35.136802,-80.824279],"Date":"April 11, 2020"],
-                    "LostItem2":["Name":"Phone","Location":[35.136399,-80.824924],"Date":"April 11, 2020"],
-                    "LostItem3":["Name":"Keys","Location":[35.136399,-80.818847],"Date":"April 11, 2020"]]
+        let dict = ["LostItem1":["Name":"Wallet","Location":[35.136802,-80.824279],"Date":"April 11, 2020","Description":""],
+                    "LostItem2":["Name":"Phone","Location":[35.136399,-80.824924],"Date":"April 11, 2020","Description":""],
+                    "LostItem3":["Name":"Keys","Location":[35.136399,-80.818847],"Date":"April 11, 2020","Description":""]]
         defaults.set(logoImages,forKey:"TestIcons")
         defaults.set(detImages,forKey:"TestImages")
         defaults.set(dict,forKey: "TestDict")

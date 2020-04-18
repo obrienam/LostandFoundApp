@@ -89,7 +89,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Description" translatesAutoresizingMaskIntoConstraints="NO" id="2WU-zZ-8Ug">
                                 <rect key="frame" x="23" y="258" width="263" height="60"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -248,28 +248,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dxb-1B-PJI">
-                                <rect key="frame" x="1" y="573" width="375" height="44"/>
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="fuK-KM-e3U"/>
-                                    <barButtonItem title="Claim" id="fjK-mh-oWA"/>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="brS-cB-jRa"/>
-                                </items>
-                            </toolbar>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xRJ-8H-8id">
-                                <rect key="frame" x="2" y="292" width="373" height="277"/>
-                            </mapView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ph7-ks-ztX">
-                                <rect key="frame" x="0.0" y="94" width="148" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="148" id="fta-6b-0rw"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hoy-ga-WPo">
-                                <rect key="frame" x="0.0" y="148" width="148" height="21"/>
+                                <rect key="frame" x="17" y="106" width="148" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="148" id="Gqt-tu-uEx"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -277,35 +260,55 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mpu-c1-7TR">
                                 <rect key="frame" x="192" y="69" width="183" height="177"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="177" id="c62-iV-2BB"/>
+                                    <constraint firstAttribute="height" constant="177" id="tEe-Jf-J90"/>
                                 </constraints>
                             </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bSW-88-Bkh">
+                                <rect key="frame" x="13" y="160" width="157" height="66"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="66" id="bde-ZR-Htu"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xRJ-8H-8id">
+                                <rect key="frame" x="0.0" y="340" width="376" height="277"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="mpu-c1-7TR" firstAttribute="trailing" secondItem="YRZ-0C-uSM" secondAttribute="trailing" id="0Tr-Hq-W0Y"/>
-                            <constraint firstItem="xRJ-8H-8id" firstAttribute="top" secondItem="mpu-c1-7TR" secondAttribute="bottom" constant="46" id="4jo-yg-Vaa"/>
-                            <constraint firstItem="dxb-1B-PJI" firstAttribute="leading" secondItem="YRZ-0C-uSM" secondAttribute="leading" constant="1" id="BuY-nd-iey"/>
-                            <constraint firstItem="ph7-ks-ztX" firstAttribute="trailing" secondItem="hoy-ga-WPo" secondAttribute="trailing" id="Bxn-rc-yli"/>
-                            <constraint firstItem="mpu-c1-7TR" firstAttribute="top" secondItem="YRZ-0C-uSM" secondAttribute="top" constant="25" id="KOR-mq-kjg"/>
-                            <constraint firstItem="hoy-ga-WPo" firstAttribute="top" secondItem="ph7-ks-ztX" secondAttribute="bottom" constant="33" id="KlG-Hk-HrO"/>
-                            <constraint firstItem="YRZ-0C-uSM" firstAttribute="bottom" secondItem="dxb-1B-PJI" secondAttribute="bottom" constant="1" id="PqI-B8-Sm0"/>
-                            <constraint firstItem="mpu-c1-7TR" firstAttribute="trailing" secondItem="xRJ-8H-8id" secondAttribute="trailing" id="SlM-4K-SJn"/>
-                            <constraint firstItem="ph7-ks-ztX" firstAttribute="leading" secondItem="YRZ-0C-uSM" secondAttribute="leading" id="YaT-2s-KMZ"/>
-                            <constraint firstItem="xRJ-8H-8id" firstAttribute="leading" secondItem="YRZ-0C-uSM" secondAttribute="leading" constant="2" id="Yrc-e3-dd8"/>
-                            <constraint firstItem="mpu-c1-7TR" firstAttribute="leading" secondItem="ph7-ks-ztX" secondAttribute="trailing" constant="44" id="dHN-x3-gKG"/>
-                            <constraint firstItem="dxb-1B-PJI" firstAttribute="top" secondItem="xRJ-8H-8id" secondAttribute="bottom" constant="4" id="ffU-Nx-6Np"/>
-                            <constraint firstItem="ph7-ks-ztX" firstAttribute="top" secondItem="YRZ-0C-uSM" secondAttribute="top" constant="50" id="jKM-rM-9Iz"/>
-                            <constraint firstItem="xRJ-8H-8id" firstAttribute="centerX" secondItem="dxb-1B-PJI" secondAttribute="centerX" id="noQ-Vj-i6X"/>
-                            <constraint firstItem="ph7-ks-ztX" firstAttribute="leading" secondItem="hoy-ga-WPo" secondAttribute="leading" id="p1w-bm-1hr"/>
+                            <constraint firstItem="mpu-c1-7TR" firstAttribute="leading" secondItem="bSW-88-Bkh" secondAttribute="trailing" constant="22" id="4Uk-e8-5Pm"/>
+                            <constraint firstItem="xRJ-8H-8id" firstAttribute="leading" secondItem="YRZ-0C-uSM" secondAttribute="leading" id="5u2-4o-hhc"/>
+                            <constraint firstItem="hoy-ga-WPo" firstAttribute="centerX" secondItem="bSW-88-Bkh" secondAttribute="centerX" id="Gcp-dA-9a4"/>
+                            <constraint firstItem="xRJ-8H-8id" firstAttribute="top" secondItem="mpu-c1-7TR" secondAttribute="bottom" constant="94" id="NXH-1S-Dch"/>
+                            <constraint firstItem="mpu-c1-7TR" firstAttribute="trailing" secondItem="YRZ-0C-uSM" secondAttribute="trailing" id="Nae-Ee-yAH"/>
+                            <constraint firstItem="bSW-88-Bkh" firstAttribute="top" secondItem="hoy-ga-WPo" secondAttribute="bottom" constant="33" id="X9a-is-M87"/>
+                            <constraint firstItem="hoy-ga-WPo" firstAttribute="leading" secondItem="YRZ-0C-uSM" secondAttribute="leading" constant="17" id="d9d-Gp-ozG"/>
+                            <constraint firstItem="hoy-ga-WPo" firstAttribute="top" secondItem="YRZ-0C-uSM" secondAttribute="top" constant="62" id="gsa-df-FcO"/>
+                            <constraint firstItem="mpu-c1-7TR" firstAttribute="leading" secondItem="hoy-ga-WPo" secondAttribute="trailing" constant="27" id="kUi-b4-owS"/>
+                            <constraint firstItem="mpu-c1-7TR" firstAttribute="top" secondItem="YRZ-0C-uSM" secondAttribute="top" constant="25" id="lAR-PP-uYm"/>
+                            <constraint firstItem="xRJ-8H-8id" firstAttribute="centerX" secondItem="60F-PQ-WRd" secondAttribute="centerX" id="tTt-10-IVz"/>
+                            <constraint firstItem="YRZ-0C-uSM" firstAttribute="bottom" secondItem="xRJ-8H-8id" secondAttribute="bottom" constant="1" id="vK2-F1-Fc4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YRZ-0C-uSM"/>
                     </view>
-                    <navigationItem key="navigationItem" id="ek1-TE-U1Z"/>
+                    <navigationItem key="navigationItem" id="ek1-TE-U1Z">
+                        <barButtonItem key="rightBarButtonItem" title="Claim" style="plain" id="4T1-ol-Yr3">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cql-rg-OF3">
+                                <rect key="frame" x="276" y="7" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Claim"/>
+                                <connections>
+                                    <action selector="claimButton:" destination="kLr-AP-sgr" eventType="touchUpInside" id="jNT-n9-H9N"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="btnText" destination="fjK-mh-oWA" id="2yV-ds-o4Z"/>
                         <outlet property="dateString" destination="hoy-ga-WPo" id="q4q-yS-nj8"/>
-                        <outlet property="itemName" destination="ph7-ks-ztX" id="A4M-fi-foZ"/>
+                        <outlet property="detailField" destination="bSW-88-Bkh" id="xEn-Jx-0Lt"/>
                         <outlet property="mapView" destination="xRJ-8H-8id" id="Zdm-CS-DS7"/>
                         <outlet property="thumnail" destination="mpu-c1-7TR" id="mRG-I1-fO6"/>
                     </connections>

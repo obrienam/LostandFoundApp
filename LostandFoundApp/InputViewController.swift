@@ -47,7 +47,7 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
         nameField.center.x = self.view.center.x
         locField.center.x = self.view.center.x
         detailField.text="Description"
-        detailField.textColor=UIColor.lightGray
+        detailField.textColor=UIColor.placeholderText
         detailField.layer.borderWidth=1
         detailField.layer.borderColor=UIColor.systemGray3.cgColor
         detailField.delegate=self
@@ -89,7 +89,7 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
                     let defaults = UserDefaults.standard
                     var dictionary = defaults.object(forKey: "TestDict") as? [String:Any]
                     let size = (dictionary?.count ?? 3) as Int
-                    let item = ["LostItem\(size+1)":["Name":"\(self.nameField?.text ?? "Blah")","Location":[location.coordinate.latitude,location.coordinate.longitude],"Date":self.dateField.text ?? "Blah"]]
+                    let item = ["LostItem\(size+1)":["Name":"\(self.nameField?.text ?? "Blah")","Location":[location.coordinate.latitude,location.coordinate.longitude],"Date":self.dateField.text ?? "Blah","Description":self.detailField.text ?? "Blah"]]
                     dictionary?.merge(item){(current, _) in current}
                     defaults.set(dictionary,forKey:"TestDict")
                     var images=defaults.object(forKey: "TestIcons") as? [Data]
@@ -134,15 +134,15 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
 
     }
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if detailField.textColor == UIColor.lightGray {
+        if detailField.textColor == UIColor.placeholderText {
             detailField.text = nil
-            detailField.textColor = UIColor.black
+            detailField.textColor = UIColor.label
         }
     }
     func textViewDidEndEditing(_ textView: UITextView) {
         if detailField.text.isEmpty {
             detailField.text = "Description"
-            detailField.textColor = UIColor.lightGray
+            detailField.textColor = UIColor.placeholderText
         }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

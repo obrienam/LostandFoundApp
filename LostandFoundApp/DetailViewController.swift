@@ -16,13 +16,15 @@ class DetailViewController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet var thumnail: UIImageView!
     var pin:Artwork!
     @IBOutlet var mapView: MKMapView!
-    @IBOutlet var itemName: UILabel!
+
+    @IBOutlet var detailField: UITextView!
     var detailString: String!
     var locationManager: CLLocationManager?
     var loclist = [Double]()
     var loc:String!
     var date:String!
     var im:UIImage!
+    var desc:String!
     let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
@@ -31,7 +33,7 @@ class DetailViewController: UIViewController,CLLocationManagerDelegate {
         //detailLabel?.text=detailString
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil); NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard)); view.addGestureRecognizer(tap)
-        itemName.text=detailString
+       
         locationManager = CLLocationManager()
         
         
@@ -51,6 +53,8 @@ class DetailViewController: UIViewController,CLLocationManagerDelegate {
         thumnail.transform = thumnail.transform.rotated(by: CGFloat(Double.pi / 2))
         
         dateString.text=date
+        detailField.text=desc
+        detailField.textColor = UIColor.label
         let savedict=defaults.object(forKey: "TestDict") as? [String: String] ?? [String: String]()
                print(savedict["LostItem1"] ?? "Blah")
         // Do any additional setup after loading the view.
@@ -64,7 +68,7 @@ class DetailViewController: UIViewController,CLLocationManagerDelegate {
     }
     func addAnnotation(){
         
-        let artwork = Artwork(title: "\(itemName.text ?? "Item")", locationName: "Place", discipline: "Location", coordinate: CLLocationCoordinate2D(latitude: loclist[0] as! CLLocationDegrees, longitude: loclist[1] as! CLLocationDegrees))
+        let artwork = Artwork(title: "\(detailString ?? "Item")", locationName: "Place", discipline: "Location", coordinate: CLLocationCoordinate2D(latitude: loclist[0] , longitude: loclist[1] ))
         pin=artwork
         self.mapView.addAnnotation(artwork)
         
@@ -103,6 +107,11 @@ class DetailViewController: UIViewController,CLLocationManagerDelegate {
     func convertLoc(location: CLPlacemark?) -> String?{
         return location?.name
     }
+    @IBAction func claimButton(_ sender: UIButton) {
+        return
+    }
+    
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             let geocoder = CLGeocoder()
