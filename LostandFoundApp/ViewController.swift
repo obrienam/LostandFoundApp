@@ -113,13 +113,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let images=defaults.object(forKey: "TestIcons") as! [Data]
         
         let thumb = UIImage(data: images[indexPath.row])
-        print(images.count)
         
-        cell.thumbnail?.image=thumb
-        
-        
+        let image = UIImage(cgImage: (thumb?.cgImage)!, scale: CGFloat(1.0), orientation: .right)
+        cell.thumbnail.image=image
         cell.detailLabel?.text=testDates[indexPath.row]
-        
+        cell.thumbnail.layer.cornerRadius=8.0
         return cell
     }
     
@@ -198,7 +196,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func makeDefault(){
         let image = UIImage(named:"pic")
         let imageData = (image?.pngData())
-        let icon = UIImage(named:"pic2")
+        let icon = UIImage(named:"pic")
         let iconData = (icon?.pngData())
         var logoImages = [Data]()
         var detImages = [Data]()

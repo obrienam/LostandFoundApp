@@ -95,7 +95,8 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
                     var images=defaults.object(forKey: "TestIcons") as? [Data]
                     let pic:Data
                     if(self.im==nil) {
-                        pic = UIImage(named: "pic2")!.pngData()!
+                        pic = UIImage(named: "pic")!.pngData()!
+                        
                     }
                     else {
                         pic = self.im.pngData()!
