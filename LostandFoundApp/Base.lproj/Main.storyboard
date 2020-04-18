@@ -27,19 +27,25 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZlY-BV-z3Z">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ZlY-BV-z3Z">
                                 <rect key="frame" x="300" y="179" width="66" height="76"/>
-                                <state key="normal" title="Current Location"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Use Current Location">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="fillLocation:" destination="1jt-54-rmQ" eventType="touchUpInside" id="ZRh-f1-zhp"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Se-S1-9jb">
                                 <rect key="frame" x="19" y="442" width="107" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="107" id="zRb-dh-q5E"/>
                                 </constraints>
-                                <state key="normal" title="Take Photo"/>
+                                <state key="normal" title="Take Photo">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="photoTake:" destination="1jt-54-rmQ" eventType="touchUpInside" id="eWh-Q2-z1W"/>
                                 </connections>
@@ -72,11 +78,14 @@
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k3S-MU-TTU">
-                                <rect key="frame" x="240" y="444" width="107" height="30"/>
+                                <rect key="frame" x="242" y="441" width="107" height="32"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="107" id="qAs-wE-4qA"/>
                                 </constraints>
-                                <state key="normal" title="Take Photo"/>
+                                <state key="normal" title="Take Photo">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="photoTake:" destination="1jt-54-rmQ" eventType="touchUpInside" id="NyE-Ds-Yfb"/>
                                 </connections>
@@ -117,9 +126,12 @@
                     <connections>
                         <outlet property="dateField" destination="dqC-t6-O1B" id="2mP-Oz-eCd"/>
                         <outlet property="imagePicked" destination="Alb-1u-pNa" id="y0k-b9-hXo"/>
+                        <outlet property="locButton" destination="ZlY-BV-z3Z" id="wn9-bf-W7B"/>
                         <outlet property="locField" destination="8C6-3H-pGh" id="5no-JJ-uHa"/>
                         <outlet property="nameField" destination="ASZ-pX-Pss" id="K4d-Rd-Ewc"/>
                         <outlet property="photoButton" destination="9Se-S1-9jb" id="qiC-lE-iJF"/>
+                        <outlet property="photoButton2" destination="k3S-MU-TTU" id="dh6-0U-UDz"/>
+                        <outlet property="subButton" destination="xEm-nQ-QHm" id="fYX-Kn-a2P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3LO-y8-KH4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

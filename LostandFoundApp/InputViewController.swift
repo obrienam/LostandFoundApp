@@ -16,6 +16,9 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
     @IBOutlet var imagePicked: UIImageView!
     @IBOutlet var photoButton: UIButton!
     @IBOutlet var dateField: UITextField!
+    @IBOutlet var locButton: UIButton!
+    @IBOutlet var photoButton2: UIButton!
+    @IBOutlet var subButton: UIButton!
     var loc:String!
     var times=0
     var locationManager: CLLocationManager?
@@ -28,6 +31,11 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard)); view.addGestureRecognizer(tap)
         nameField.delegate=self
         locField.delegate=self
+        locButton.titleLabel?.textAlignment = .center
+        locButton.layer.cornerRadius = 8
+        photoButton.layer.cornerRadius = 8
+        photoButton2.layer.cornerRadius = 8
+        subButton.layer.cornerRadius = 8
         nameField.center.x = self.view.center.x
         locField.center.x = self.view.center.x
         let cdate = Date()
