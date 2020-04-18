@@ -112,8 +112,49 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
                     defaults.set(images,forKey:"TestIcons")
                     dimages?.append(pic2)
                     defaults.set(dimages,forKey:"TestImages")
+                    print(dictionary!.count)
                     return
                 }
+                
+            }
+            else {
+                geocoder.geocodeAddressString("Appalachian State University" ?? "Blah") { (placemarks, error) in
+                           if error == nil {
+                               if let placemark = placemarks?[0] {
+                                   let location = placemark.location!
+                                   let defaults = UserDefaults.standard
+                                   var dictionary = defaults.object(forKey: "TestDict") as? [String:Any]
+                                   let size = (dictionary?.count ?? 3) as Int
+                                   let item = ["LostItem\(size+1)":["Name":"\(self.nameField?.text ?? "Blah")","Location":[location.coordinate.latitude,location.coordinate.longitude],"Date":self.dateField.text ?? "Blah","Description":self.detailField.text ?? "Blah"]]
+                                   dictionary?.merge(item){(current, _) in current}
+                                   defaults.set(dictionary,forKey:"TestDict")
+                                   var images=defaults.object(forKey: "TestIcons") as? [Data]
+                                   let pic:Data
+                                   if(self.im==nil) {
+                                       pic = UIImage(named: "pic")!.pngData()!
+                                   }
+                                   else {
+                                       pic = self.im.pngData()!
+                                   }
+                                   var dimages=defaults.object(forKey: "TestImages") as? [Data]
+                                   let pic2:Data
+                                   if(self.im2==nil) {
+                                       pic2 = UIImage(named: "pic")!.pngData()!
+                                   }
+                                   else {
+                                       pic2 = self.im2.pngData()!
+                                   }
+                                   images?.append(pic)
+                                   defaults.set(images,forKey:"TestIcons")
+                                   dimages?.append(pic2)
+                                   defaults.set(dimages,forKey:"TestImages")
+                                   print(dictionary!.count)
+                                   return
+                               }
+                               
+                           }
+                }
+                
             }
                 
             
@@ -232,7 +273,7 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
                 }
                 else {
                  // An error occurred during geocoding.
-                    self.loc="None"
+                    self.loc="Appalachian State University"
                     self.locField.text=self.loc
                     self.locationManager?.stopUpdatingLocation()
                 }

@@ -18,6 +18,7 @@ class DetailViewController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet var mapView: MKMapView!
 
     @IBOutlet var detailField: UITextView!
+    var key:String!
     var detailString: String!
     var locationManager: CLLocationManager?
     var loclist = [Double]()
@@ -25,7 +26,9 @@ class DetailViewController: UIViewController,CLLocationManagerDelegate {
     var date:String!
     var im:UIImage!
     var desc:String!
+    var ind:Int!
     let defaults = UserDefaults.standard
+    var tableViewController:ViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,7 +111,27 @@ class DetailViewController: UIViewController,CLLocationManagerDelegate {
         return location?.name
     }
     @IBAction func claimButton(_ sender: UIButton) {
-        return
+        var dictionary = defaults.object(forKey: "TestDict") as? [String:Any]
+        var logos = defaults.object(forKey: "TestIcons") as? [Data]
+        var images = defaults.object(forKey: "TestImages") as? [Data]
+        logos?.remove(at: ind)
+        images?.remove(at: ind)
+        
+        print("Index \(ind)")
+        dictionary?.removeValue(forKey: key)
+        var newDict=[String:Any]()
+        var i = 0
+        dictionary?.forEach{ key in
+            print(key)
+            newDict["LostItem\(i+1)"]=key.value
+            i=i+1
+        }
+        dictionary=newDict
+        defaults.set(logos,forKey:"TestIcons")
+        defaults.set(images,forKey:"TestImages")
+        defaults.set(dictionary,forKey: "TestDict")
+        self.tableViewController?.onUserAction(ind: self.ind)
+        _ = navigationController?.popViewController(animated: true)
     }
     
     

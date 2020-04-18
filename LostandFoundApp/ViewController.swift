@@ -20,7 +20,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var testDates = [String]()
     var testDesc = [String]()
     var testDetails = [[Double]]()
- 
+    var toRemove:Int!
     @IBOutlet var petTable: UITableView!
     @IBOutlet var eButton: UIBarButtonItem!
     var isLoadedFirstTime = false
@@ -41,8 +41,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let loc = array?["Location"]
             
             testDetails.append(loc as! [Double])
-            print(testDetails[i-1])
+           
         }
+        
         isLoadedFirstTime = true
         
         
@@ -50,29 +51,47 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     override func viewDidAppear(_ animated: Bool) {
         if !isLoadedFirstTime {
+            
             super.viewDidAppear(animated)
             let dictionary = defaults.object(forKey: "TestDict") as? [String:Any]
-         
+            
             let size = (dictionary?.count ?? 3) as Int
-            for i in 0...size-1 {
-                if i < size-1 || size == testNames.count {
-                    continue
-                }
-                else {
-                    let array = dictionary?["LostItem\(i+1)"] as? [String:Any]
-                    let val = array?["Name"] ?? "Blah"
-                    let date = array?["Date"] ?? "Blah"
-                    let desc = array?["Description"] ?? "Blah"
-                   
-                    testNames.append(val as! String)
-                    testDates.append(date as! String)
-                    testDesc.append(desc as! String)
-                    let loc = array?["Location"]
-                    
-                    testDetails.append(loc as! [Double])
-                    print(testDetails[i-1])
-                }
+         
+            if size < testNames.count {
+                
+                testNames.remove(at: self.toRemove)
+                testDates.remove(at: self.toRemove)
+                testDesc.remove(at: self.toRemove)
+                
+                
                 petTable.reloadData()
+            }
+            else
+            {
+                
+                for i in 0...size-1 {
+                    if i < size-1 || size == testNames.count {
+                      
+                        continue
+                    }
+                    else {
+                        
+                        let array = dictionary?["LostItem\(i+1)"] as? [String:Any]
+                        
+                        let val = array?["Name"] ?? "Blah"
+                        let date = array?["Date"] ?? "Blah"
+                        let desc = array?["Description"] ?? "Blah"
+                       
+                        testNames.append(val as! String)
+                        testDates.append(date as! String)
+                        testDesc.append(desc as! String)
+                        let loc = array?["Location"]
+                        
+                        testDetails.append(loc as! [Double])
+                     
+                    }
+                    petTable.reloadData()
+                }
             }
             
         }
@@ -94,6 +113,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         return cell
     }
+    func onUserAction(ind:Int){
+        print("blah7")
+        self.toRemove=ind
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedItem = testNames[indexPath.row]
         selectedRow=indexPath.row
@@ -104,12 +127,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier=="detailLink"{
             let nextVC = segue.destination as! DetailViewController
-            
+            self.toRemove=selectedRow
             nextVC.navigationItem.title = "\(selectedItem) Details"
+            nextVC.key="LostItem\(selectedRow+1)"
             nextVC.detailString="\(selectedItem)"
             nextVC.loclist=testDetails[selectedRow]
             nextVC.date=testDates[selectedRow]
             nextVC.desc=testDesc[selectedRow]
+            nextVC.ind=selectedRow
             let images=defaults.object(forKey: "TestImages") as! [Data]
             
             let thumb = UIImage(data: images[selectedRow])
