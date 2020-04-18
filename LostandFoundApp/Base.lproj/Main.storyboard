@@ -181,25 +181,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="P3W-Vw-pyw">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="P3W-Vw-pyw">
                                 <rect key="frame" x="1" y="44" width="375" height="575"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellID" id="d3f-Q3-QRu" customClass="TableViewCell" customModule="LostandFoundApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="d3f-Q3-QRu" id="eTi-Eo-BqN" customClass="TableViewCell" customModule="LostandFoundApp" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKd-MO-ZWm">
-                                                    <rect key="frame" x="13" y="2" width="243" height="21"/>
+                                                    <rect key="frame" x="89" y="12" width="243" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iQc-gq-Iuh">
+                                                    <rect key="frame" x="11" y="12" width="55" height="52"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZBW-On-OnY">
-                                                    <rect key="frame" x="18" y="22" width="242" height="16"/>
+                                                    <rect key="frame" x="95" y="44" width="242" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
@@ -209,6 +214,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="detailLabel" destination="ZBW-On-OnY" id="lpK-AB-J3e"/>
+                                            <outlet property="thumbnail" destination="iQc-gq-Iuh" id="XET-ca-N0x"/>
                                             <outlet property="titleLabel" destination="lKd-MO-ZWm" id="tpl-Ny-7AM"/>
                                         </connections>
                                     </tableViewCell>
@@ -220,12 +226,6 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="P3W-Vw-pyw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="1" id="Yz6-Fv-mDH"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="P3W-Vw-pyw" secondAttribute="trailing" constant="-17" id="atk-1K-kuE"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="P3W-Vw-pyw" secondAttribute="bottom" constant="-1" id="b7I-U3-iOh"/>
-                            <constraint firstItem="P3W-Vw-pyw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="k1Y-cg-BFb"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Lost Items" id="qJH-Bv-aLn">
@@ -305,6 +305,9 @@
                                 <rect key="frame" x="276" y="7" width="83" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Claim"/>
+                                <connections>
+                                    <action selector="claimButton:" destination="kLr-AP-sgr" eventType="touchUpInside" id="rUl-OR-mD8"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>

@@ -116,7 +116,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         print(images.count)
         
         cell.thumbnail?.image=thumb
-        cell.thumbnail?.transform = cell.thumbnail.transform.rotated(by: CGFloat(Double.pi / 2))
+        
+        
         cell.detailLabel?.text=testDates[indexPath.row]
         
         return cell
@@ -197,10 +198,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func makeDefault(){
         let image = UIImage(named:"pic")
         let imageData = (image?.pngData())
+        let icon = UIImage(named:"pic2")
+        let iconData = (icon?.pngData())
         var logoImages = [Data]()
         var detImages = [Data]()
         for i in 0...2 {
-            logoImages.append(imageData!)
+            logoImages.append(iconData!)
             detImages.append(imageData!)
         }
         let dict = ["LostItem1":["Name":"Wallet","Location":[35.136802,-80.824279],"Date":"April 11, 2020","Description":""],
