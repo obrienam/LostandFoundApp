@@ -63,7 +63,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 testNames.remove(at: self.toRemove)
                 testDates.remove(at: self.toRemove)
                 testDesc.remove(at: self.toRemove)
-                
+                testDetails.remove(at: self.toRemove)
                 
                 petTable.reloadData()
             }

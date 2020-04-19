@@ -61,7 +61,7 @@ class MapViewController: UIViewController{
             
             let dictionary = defaults.object(forKey: "TestDict") as? [String:Any]
             let size = (dictionary?.count ?? 3) as Int
-            if size > testNames.count {
+            if size > testNames.count || size < testNames.count{
                 mapView.removeAnnotations(pins)
                 for i in 0...size-1 {
                     if i < size-1 {
