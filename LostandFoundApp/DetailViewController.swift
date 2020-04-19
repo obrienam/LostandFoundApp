@@ -29,7 +29,7 @@ class DetailViewController: UIViewController,CLLocationManagerDelegate {
     var ind:Int!
     let defaults = UserDefaults.standard
     var tableViewController:ViewController?
-    
+    var mapViewController:MapViewController?
     override func viewDidLoad() {
         super.viewDidLoad()
         //detailLabel.isUserInteractionEnabled=false

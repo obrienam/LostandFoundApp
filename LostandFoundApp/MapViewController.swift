@@ -21,6 +21,7 @@ class MapViewController: UIViewController{
     var pins=[Artwork]()
     let defaults = UserDefaults.standard
     var isLoadedFirstTime = false
+    var toRemove=0
     override func viewDidLoad() {
         super.viewDidLoad()
         self.mapView.showsUserLocation=true
@@ -56,12 +57,30 @@ class MapViewController: UIViewController{
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         if !isLoadedFirstTime {
-            
             let dictionary = defaults.object(forKey: "TestDict") as? [String:Any]
             let size = (dictionary?.count ?? 3) as Int
-            if size > testNames.count || size < testNames.count{
+            if size < testNames.count{
+                print("blah")
+                testNames=[]
+                testDetails=[]
+                mapView.removeAnnotations(pins)
+                for i in 0...size-1 {
+               
+                    let array = dictionary?["LostItem\(i+1)"] as? [String:Any]
+                    let val = array?["Name"] ?? "Blah"
+                    testNames.append(val as! String)
+                    let loc = array?["Location"]
+                    
+                    testDetails.append(loc as! [Double])
+                    
+                    
+                }
+                addAnnotations()
+            }
+            if size > testNames.count{
                 mapView.removeAnnotations(pins)
                 for i in 0...size-1 {
                     if i < size-1 {
@@ -74,7 +93,7 @@ class MapViewController: UIViewController{
                         let loc = array?["Location"]
                         
                         testDetails.append(loc as! [Double])
-                        print(testDetails[i-1])
+                      
                     }
                 }
                 addAnnotations()
