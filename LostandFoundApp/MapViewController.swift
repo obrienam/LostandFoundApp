@@ -40,16 +40,18 @@ class MapViewController: UIViewController{
         setMapFocus(location: userLocation, radiusInKm: 500)
         let dictionary = defaults.object(forKey: "TestDict") as? [String:Any]
         let size = (dictionary?.count ?? 3) as Int
-        for i in 0...size-1 {
-            let array = dictionary?["LostItem\(i+1)"] as? [String:Any]
-            let val = array?["Name"] ?? "Blah"
-            testNames.append(val as! String)
-            let loc = array?["Location"]
-            
-            testDetails.append(loc as! [Double])
-            
+        if size != 0 {
+            for i in 0...size-1 {
+                let array = dictionary?["LostItem\(i+1)"] as? [String:Any]
+                let val = array?["Name"] ?? "Blah"
+                testNames.append(val as! String)
+                let loc = array?["Location"]
+                
+                testDetails.append(loc as! [Double])
+                
+            }
+            addAnnotations()
         }
-        addAnnotations()
         isLoadedFirstTime=true
         
         
@@ -62,23 +64,27 @@ class MapViewController: UIViewController{
         if !isLoadedFirstTime {
             let dictionary = defaults.object(forKey: "TestDict") as? [String:Any]
             let size = (dictionary?.count ?? 3) as Int
+            
             if size < testNames.count{
                 print("blah")
                 testNames=[]
                 testDetails=[]
                 mapView.removeAnnotations(pins)
-                for i in 0...size-1 {
-               
-                    let array = dictionary?["LostItem\(i+1)"] as? [String:Any]
-                    let val = array?["Name"] ?? "Blah"
-                    testNames.append(val as! String)
-                    let loc = array?["Location"]
-                    
-                    testDetails.append(loc as! [Double])
-                    
-                    
+                if size != 0
+                {
+                    for i in 0...size-1 {
+                   
+                        let array = dictionary?["LostItem\(i+1)"] as? [String:Any]
+                        let val = array?["Name"] ?? "Blah"
+                        testNames.append(val as! String)
+                        let loc = array?["Location"]
+                        
+                        testDetails.append(loc as! [Double])
+                        
+                        
+                    }
+                    addAnnotations()
                 }
-                addAnnotations()
             }
             if size > testNames.count{
                 mapView.removeAnnotations(pins)

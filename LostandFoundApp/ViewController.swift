@@ -69,29 +69,30 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
             else
             {
-                
-                for i in 0...size-1 {
-                    if i < size-1 || size == testNames.count {
-                      
-                        continue
+                if size != 0 {
+                    for i in 0...size-1 {
+                        if i < size-1 || size == testNames.count {
+                          
+                            continue
+                        }
+                        else {
+                            
+                            let array = dictionary?["LostItem\(i+1)"] as? [String:Any]
+                            
+                            let val = array?["Name"] ?? "Blah"
+                            let date = array?["Date"] ?? "Blah"
+                            let desc = array?["Description"] ?? "Blah"
+                           
+                            testNames.append(val as! String)
+                            testDates.append(date as! String)
+                            testDesc.append(desc as! String)
+                            let loc = array?["Location"]
+                            
+                            testDetails.append(loc as! [Double])
+                         
+                        }
+                        petTable.reloadData()
                     }
-                    else {
-                        
-                        let array = dictionary?["LostItem\(i+1)"] as? [String:Any]
-                        
-                        let val = array?["Name"] ?? "Blah"
-                        let date = array?["Date"] ?? "Blah"
-                        let desc = array?["Description"] ?? "Blah"
-                       
-                        testNames.append(val as! String)
-                        testDates.append(date as! String)
-                        testDesc.append(desc as! String)
-                        let loc = array?["Location"]
-                        
-                        testDetails.append(loc as! [Double])
-                     
-                    }
-                    petTable.reloadData()
                 }
             }
             
