@@ -16,13 +16,14 @@
 		B51F75CF2402FEA5005B3DF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B51F75CD2402FEA5005B3DF6 /* LaunchScreen.storyboard */; };
 		B52CB3B82432C2B8006F1D80 /* Datatest.plist in Resources */ = {isa = PBXBuildFile; fileRef = B52CB3B72432C2B8006F1D80 /* Datatest.plist */; };
 		B59348F3244BBF55007CC20C /* pic2.png in Resources */ = {isa = PBXBuildFile; fileRef = B59348F2244BBF55007CC20C /* pic2.png */; };
+		B593977924537F0A0024B699 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B593977824537F0A0024B699 /* icon.png */; };
+		B593977B245397190024B699 /* ImageZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B593977A245397190024B699 /* ImageZoomView.swift */; };
 		B5A88209240DA75E00703C82 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A88208240DA75E00703C82 /* DetailViewController.swift */; };
 		B5C66EE12439292600117F71 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C66EE02439292600117F71 /* InputViewController.swift */; };
 		B5D712022427DC4D0017E164 /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D712012427DC4D0017E164 /* Artwork.swift */; };
 		B5DF29C2244216B000B8FD5C /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF29C1244216B000B8FD5C /* TableViewCell.swift */; };
 		B5DF29C42442257400B8FD5C /* picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF29C32442257400B8FD5C /* picker.swift */; };
 		B5DF29C624426BDC00B8FD5C /* pic.png in Resources */ = {isa = PBXBuildFile; fileRef = B5DF29C524426BDC00B8FD5C /* pic.png */; };
-		B5DF29CC24426D3200B8FD5C /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B5DF29CB24426D3200B8FD5C /* icon.png */; };
 		B5EF62B92430FF93001C9A75 /* ExperimentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EF62B82430FF93001C9A75 /* ExperimentViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,13 +39,14 @@
 		B51F75D02402FEA5005B3DF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B52CB3B72432C2B8006F1D80 /* Datatest.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Datatest.plist; sourceTree = "<group>"; };
 		B59348F2244BBF55007CC20C /* pic2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic2.png; sourceTree = "<group>"; };
+		B593977824537F0A0024B699 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../../icon.png; sourceTree = "<group>"; };
+		B593977A245397190024B699 /* ImageZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageZoomView.swift; sourceTree = "<group>"; };
 		B5A88208240DA75E00703C82 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		B5C66EE02439292600117F71 /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		B5D712012427DC4D0017E164 /* Artwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		B5DF29C1244216B000B8FD5C /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		B5DF29C32442257400B8FD5C /* picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = picker.swift; sourceTree = "<group>"; };
 		B5DF29C524426BDC00B8FD5C /* pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic.png; sourceTree = "<group>"; };
-		B5DF29CB24426D3200B8FD5C /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../../../Desktop/icon.png; sourceTree = "<group>"; };
 		B5EF62B82430FF93001C9A75 /* ExperimentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,12 +83,13 @@
 				B51F75C22402FEA2005B3DF6 /* AppDelegate.swift */,
 				B51F75C42402FEA2005B3DF6 /* SceneDelegate.swift */,
 				B51F75C62402FEA2005B3DF6 /* ViewController.swift */,
+				B593977A245397190024B699 /* ImageZoomView.swift */,
 				B51F75C82402FEA2005B3DF6 /* Main.storyboard */,
 				B5DF29C524426BDC00B8FD5C /* pic.png */,
 				B5DF29C1244216B000B8FD5C /* TableViewCell.swift */,
 				B5C66EE02439292600117F71 /* InputViewController.swift */,
 				B5DF29C32442257400B8FD5C /* picker.swift */,
-				B5DF29CB24426D3200B8FD5C /* icon.png */,
+				B593977824537F0A0024B699 /* icon.png */,
 				B5D712012427DC4D0017E164 /* Artwork.swift */,
 				B59348F2244BBF55007CC20C /* pic2.png */,
 				B5064D652426A75F0063F001 /* MapViewController.swift */,
@@ -159,9 +162,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B51F75CF2402FEA5005B3DF6 /* LaunchScreen.storyboard in Resources */,
+				B593977924537F0A0024B699 /* icon.png in Resources */,
 				B51F75CC2402FEA5005B3DF6 /* Assets.xcassets in Resources */,
 				B59348F3244BBF55007CC20C /* pic2.png in Resources */,
-				B5DF29CC24426D3200B8FD5C /* icon.png in Resources */,
 				B52CB3B82432C2B8006F1D80 /* Datatest.plist in Resources */,
 				B51F75CA2402FEA2005B3DF6 /* Main.storyboard in Resources */,
 				B5DF29C624426BDC00B8FD5C /* pic.png in Resources */,
@@ -175,6 +178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B593977B245397190024B699 /* ImageZoomView.swift in Sources */,
 				B51F75C72402FEA2005B3DF6 /* ViewController.swift in Sources */,
 				B51F75C32402FEA2005B3DF6 /* AppDelegate.swift in Sources */,
 				B51F75C52402FEA2005B3DF6 /* SceneDelegate.swift in Sources */,

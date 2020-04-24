@@ -173,7 +173,7 @@
             </objects>
             <point key="canvasLocation" x="2700" y="-571.66416791604206"/>
         </scene>
-        <!--Lost Items-->
+        <!--Found Items-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="LostandFoundApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -228,7 +228,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Lost Items" id="qJH-Bv-aLn">
+                    <navigationItem key="navigationItem" title="Found Items" id="qJH-Bv-aLn">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="SNL-Zq-zS4">
                             <connections>
                                 <action selector="addItem:" destination="BYZ-38-t0r" id="jBX-XK-hz4"/>
@@ -255,24 +255,26 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hoy-ga-WPo">
                                 <rect key="frame" x="17" y="106" width="148" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="148" id="Gqt-tu-uEx"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mpu-c1-7TR">
-                                <rect key="frame" x="192" y="69" width="183" height="177"/>
+                            <imageView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mpu-c1-7TR">
+                                <rect key="frame" x="246" y="65" width="101" height="96"/>
+                                <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="177" id="tEe-Jf-J90"/>
+                                    <constraint firstAttribute="height" constant="96" id="9DA-3O-a1X"/>
+                                    <constraint firstAttribute="width" constant="101" id="Qag-if-V4o"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="vt4-gW-C3Q" appends="YES" id="Ums-Mw-tGS"/>
+                                </connections>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bSW-88-Bkh">
                                 <rect key="frame" x="13" y="160" width="157" height="66"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="66" id="bde-ZR-Htu"/>
+                                    <constraint firstAttribute="height" constant="66" id="YUG-ZF-roi"/>
                                 </constraints>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -281,21 +283,34 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xRJ-8H-8id">
                                 <rect key="frame" x="0.0" y="340" width="376" height="277"/>
                             </mapView>
+                            <imageView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KWz-I8-rog">
+                                <rect key="frame" x="244" y="201" width="101" height="96"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="96" id="2D9-A7-mmg"/>
+                                    <constraint firstAttribute="width" constant="101" id="v8d-Xn-UfK"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="jBV-Vu-vRN" appends="YES" id="Xnx-nR-Qd1"/>
+                                </connections>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="mpu-c1-7TR" firstAttribute="leading" secondItem="bSW-88-Bkh" secondAttribute="trailing" constant="22" id="4Uk-e8-5Pm"/>
-                            <constraint firstItem="xRJ-8H-8id" firstAttribute="leading" secondItem="YRZ-0C-uSM" secondAttribute="leading" id="5u2-4o-hhc"/>
-                            <constraint firstItem="hoy-ga-WPo" firstAttribute="centerX" secondItem="bSW-88-Bkh" secondAttribute="centerX" id="Gcp-dA-9a4"/>
-                            <constraint firstItem="xRJ-8H-8id" firstAttribute="top" secondItem="mpu-c1-7TR" secondAttribute="bottom" constant="94" id="NXH-1S-Dch"/>
-                            <constraint firstItem="mpu-c1-7TR" firstAttribute="trailing" secondItem="YRZ-0C-uSM" secondAttribute="trailing" id="Nae-Ee-yAH"/>
-                            <constraint firstItem="bSW-88-Bkh" firstAttribute="top" secondItem="hoy-ga-WPo" secondAttribute="bottom" constant="33" id="X9a-is-M87"/>
-                            <constraint firstItem="hoy-ga-WPo" firstAttribute="leading" secondItem="YRZ-0C-uSM" secondAttribute="leading" constant="17" id="d9d-Gp-ozG"/>
-                            <constraint firstItem="hoy-ga-WPo" firstAttribute="top" secondItem="YRZ-0C-uSM" secondAttribute="top" constant="62" id="gsa-df-FcO"/>
-                            <constraint firstItem="mpu-c1-7TR" firstAttribute="leading" secondItem="hoy-ga-WPo" secondAttribute="trailing" constant="27" id="kUi-b4-owS"/>
-                            <constraint firstItem="mpu-c1-7TR" firstAttribute="top" secondItem="YRZ-0C-uSM" secondAttribute="top" constant="25" id="lAR-PP-uYm"/>
-                            <constraint firstItem="xRJ-8H-8id" firstAttribute="centerX" secondItem="60F-PQ-WRd" secondAttribute="centerX" id="tTt-10-IVz"/>
-                            <constraint firstItem="YRZ-0C-uSM" firstAttribute="bottom" secondItem="xRJ-8H-8id" secondAttribute="bottom" constant="1" id="vK2-F1-Fc4"/>
+                            <constraint firstItem="mpu-c1-7TR" firstAttribute="top" secondItem="YRZ-0C-uSM" secondAttribute="top" constant="21" id="1K9-Mb-VFd"/>
+                            <constraint firstItem="bSW-88-Bkh" firstAttribute="top" secondItem="hoy-ga-WPo" secondAttribute="bottom" constant="33" id="89P-dW-wHq"/>
+                            <constraint firstItem="hoy-ga-WPo" firstAttribute="centerX" secondItem="bSW-88-Bkh" secondAttribute="centerX" id="8xE-Di-GKV"/>
+                            <constraint firstItem="xRJ-8H-8id" firstAttribute="leading" secondItem="YRZ-0C-uSM" secondAttribute="leading" id="BAY-sc-7mx"/>
+                            <constraint firstItem="hoy-ga-WPo" firstAttribute="top" secondItem="YRZ-0C-uSM" secondAttribute="top" constant="62" id="GUh-t7-O4V"/>
+                            <constraint firstItem="xRJ-8H-8id" firstAttribute="centerX" secondItem="60F-PQ-WRd" secondAttribute="centerX" id="JNt-aD-C70"/>
+                            <constraint firstItem="YRZ-0C-uSM" firstAttribute="bottom" secondItem="xRJ-8H-8id" secondAttribute="bottom" constant="1" id="KBQ-0X-eVB"/>
+                            <constraint firstItem="YRZ-0C-uSM" firstAttribute="trailing" secondItem="KWz-I8-rog" secondAttribute="trailing" constant="30" id="TWB-2U-vpM"/>
+                            <constraint firstItem="KWz-I8-rog" firstAttribute="leading" secondItem="bSW-88-Bkh" secondAttribute="trailing" constant="74" id="Xjg-3J-4J9"/>
+                            <constraint firstItem="mpu-c1-7TR" firstAttribute="leading" secondItem="hoy-ga-WPo" secondAttribute="trailing" constant="81" id="avU-EM-3SX"/>
+                            <constraint firstItem="hoy-ga-WPo" firstAttribute="leading" secondItem="YRZ-0C-uSM" secondAttribute="leading" constant="17" id="gj6-xf-Zn0"/>
+                            <constraint firstItem="KWz-I8-rog" firstAttribute="top" secondItem="mpu-c1-7TR" secondAttribute="bottom" constant="40" id="kIN-pQ-ydi"/>
+                            <constraint firstItem="YRZ-0C-uSM" firstAttribute="trailing" secondItem="mpu-c1-7TR" secondAttribute="trailing" constant="28" id="oKe-vS-CGr"/>
+                            <constraint firstItem="xRJ-8H-8id" firstAttribute="top" secondItem="KWz-I8-rog" secondAttribute="bottom" constant="43" id="zxe-Xj-Dxt"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YRZ-0C-uSM"/>
                     </view>
@@ -315,18 +330,29 @@
                         <outlet property="dateString" destination="hoy-ga-WPo" id="q4q-yS-nj8"/>
                         <outlet property="detailField" destination="bSW-88-Bkh" id="xEn-Jx-0Lt"/>
                         <outlet property="mapView" destination="xRJ-8H-8id" id="Zdm-CS-DS7"/>
+                        <outlet property="thumbnail2" destination="KWz-I8-rog" id="KUg-gk-J92"/>
                         <outlet property="thumnail" destination="mpu-c1-7TR" id="mRG-I1-fO6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nGe-ot-vac" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="vt4-gW-C3Q">
+                    <connections>
+                        <action selector="thumbnail1:" destination="kLr-AP-sgr" id="zMT-e4-epY"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="jBV-Vu-vRN">
+                    <connections>
+                        <action selector="thumbnail2:" destination="kLr-AP-sgr" id="eNC-gv-bOy"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2706.4000000000001" y="127.28635682158921"/>
         </scene>
-        <!--Lost Items-->
+        <!--Found Items-->
         <scene sceneID="O8c-sp-wm4">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gbq-0u-nAt" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Lost Items" image="questionmark.circle" catalog="system" id="4SB-dj-wTI"/>
+                    <tabBarItem key="tabBarItem" title="Found Items" image="questionmark.circle" catalog="system" id="4SB-dj-wTI"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kVd-XT-G4Y">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -349,39 +375,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mdu-Vw-MD2">
-                                <rect key="frame" x="-1" y="43" width="377" height="574"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellID" id="lki-Gy-Y4d">
-                                        <rect key="frame" x="0.0" y="28" width="377" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lki-Gy-Y4d" id="T6F-6r-o5B">
-                                            <rect key="frame" x="0.0" y="0.0" width="377" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="2wg-SE-ZXl">
+                                <rect key="frame" x="64" y="197" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
                                 <connections>
-                                    <outlet property="dataSource" destination="rgN-ZY-g00" id="Wp1-R6-kBP"/>
-                                    <outlet property="delegate" destination="rgN-ZY-g00" id="GIR-8Y-Phu"/>
+                                    <outletCollection property="gestureRecognizers" destination="TDJ-PL-ewG" appends="YES" id="fQU-pN-QdE"/>
                                 </connections>
-                            </tableView>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="mdu-Vw-MD2" firstAttribute="top" secondItem="B3S-MD-uqY" secondAttribute="topMargin" constant="-1" id="1eu-cK-xO9"/>
-                            <constraint firstItem="mdu-Vw-MD2" firstAttribute="leading" secondItem="B3S-MD-uqY" secondAttribute="leadingMargin" constant="-17" id="4AP-dF-qny"/>
-                            <constraint firstItem="mdu-Vw-MD2" firstAttribute="centerX" secondItem="B3S-MD-uqY" secondAttribute="centerX" id="JY6-Qu-0Kb"/>
-                            <constraint firstItem="msV-FY-V7V" firstAttribute="bottom" secondItem="mdu-Vw-MD2" secondAttribute="bottom" constant="1" id="YS0-tg-n6D"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="msV-FY-V7V"/>
                     </view>
                     <navigationItem key="navigationItem" title="Experiments" id="9QD-Qz-CNp"/>
-                    <connections>
-                        <outlet property="tableview" destination="mdu-Vw-MD2" id="fd0-33-3ii"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="huw-Pw-76a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="TDJ-PL-ewG">
+                    <connections>
+                        <action selector="imageTapped:" destination="rgN-ZY-g00" id="Lh5-9j-LkB"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2136.8000000000002" y="944.97751124437787"/>
         </scene>
@@ -463,6 +476,7 @@
     </scenes>
     <resources>
         <image name="folder" catalog="system" width="128" height="95"/>
+        <image name="icon.png" width="96" height="96"/>
         <image name="map" catalog="system" width="128" height="113"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="questionmark.circle" catalog="system" width="128" height="121"/>

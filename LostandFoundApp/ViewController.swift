@@ -140,10 +140,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             nextVC.date=testDates[selectedRow]
             nextVC.desc=testDesc[selectedRow]
             nextVC.ind=selectedRow
-            let images=defaults.object(forKey: "TestImages") as! [Data]
+            let images=defaults.object(forKey: "TestIcons") as! [Data]
             
             let thumb = UIImage(data: images[selectedRow])
             nextVC.im=thumb
+            let images2=defaults.object(forKey: "TestImages") as! [Data]
+            
+            let thumb2 = UIImage(data: images2[selectedRow])
+            nextVC.im2=thumb2
         }
         
     }

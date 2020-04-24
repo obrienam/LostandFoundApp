@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QuickLook
 struct languages: Codable {
     let Vue: Int
     let HTML: Int
@@ -14,8 +15,9 @@ struct languages: Codable {
 }
 
 
-class ExperimentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ExperimentViewController: UIViewController, QLPreviewControllerDataSource {
     @IBOutlet var tableview: UITableView!
+    lazy var previewItem=NSURL()
     var langs:languages!
     var langtable=[[String(),String()]]
     /*
@@ -47,8 +49,8 @@ class ExperimentViewController: UIViewController, UITableViewDelegate, UITableVi
             print(error)
         }
          */
-        super.viewDidLoad()
-        
+       
+        /*
             let jsonUrlString = "https://api.github.com/repos/obrienam/Vue_Dashboard/languages"
             guard let url = URL(string: jsonUrlString) else
                 { return }
@@ -72,12 +74,28 @@ class ExperimentViewController: UIViewController, UITableViewDelegate, UITableVi
                 }
                 
             }.resume()
-        
+        */
         
         
         // Do any additional setup after loading the view.
     }
-    
+    @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
+        let previewController = QLPreviewController()
+        previewController.dataSource = self
+        present(previewController, animated: true)
+        
+    }
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return 1
+    }
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        guard let url = Bundle.main.url(forResource: String("icon"), withExtension: "png") else {
+            fatalError("Could not load \(index).png")
+        }
+
+        return url as QLPreviewItem
+    }
+    /*
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return langtable[section].count-1
     }
@@ -97,6 +115,7 @@ class ExperimentViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return langtable[section][0]
     }
+ */
     /*
     // MARK: - Navigation
 

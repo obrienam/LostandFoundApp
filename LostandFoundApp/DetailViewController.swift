@@ -9,11 +9,14 @@
 import UIKit
 import CoreLocation
 import MapKit
+import QuickLook
 class DetailViewController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet var btnText: UIBarButtonItem!
+    @IBOutlet var newImageView: UIImageView!
     var animal="placeholder"
     @IBOutlet var dateString: UILabel!
     @IBOutlet var thumnail: UIImageView!
+    @IBOutlet var thumbnail2: UIImageView!
     var pin:Artwork!
     @IBOutlet var mapView: MKMapView!
 
@@ -25,11 +28,13 @@ class DetailViewController: UIViewController,CLLocationManagerDelegate {
     var loc:String!
     var date:String!
     var im:UIImage!
+    var im2:UIImage!
     var desc:String!
     var ind:Int!
     let defaults = UserDefaults.standard
     var tableViewController:ViewController?
     var mapViewController:MapViewController?
+    var pics=[UIImageView]()
     override func viewDidLoad() {
         super.viewDidLoad()
         //detailLabel.isUserInteractionEnabled=false
@@ -54,10 +59,14 @@ class DetailViewController: UIViewController,CLLocationManagerDelegate {
         thumnail.image=im
         thumnail.layer.cornerRadius=8.0
         thumnail.transform = thumnail.transform.rotated(by: CGFloat(Double.pi / 2))
-        
+        thumbnail2.image=im2
+        thumbnail2.layer.cornerRadius=8.0
+        thumbnail2.transform = thumbnail2.transform.rotated(by: CGFloat(Double.pi / 2))
         dateString.text=date
         detailField.text=desc
         detailField.textColor = UIColor.label
+        pics.append(thumnail)
+        pics.append(thumbnail2)
         let savedict=defaults.object(forKey: "TestDict") as? [String: String] ?? [String: String]()
                print(savedict["LostItem1"] ?? "Blah")
         // Do any additional setup after loading the view.
@@ -165,6 +174,56 @@ class DetailViewController: UIViewController,CLLocationManagerDelegate {
         
 
     }
-    
+    @IBAction func thumbnail1(_ sender: UITapGestureRecognizer) {
+        
+        let imageView = sender.view as! UIImageView
+               
+               newImageView = UIImageView( image: imageView.image!)
+               
+               newImageView.transform = newImageView.transform.rotated(by: CGFloat(Double.pi / 2))
+               newImageView.frame = UIScreen.main.bounds
+               newImageView.backgroundColor = .black
+               newImageView.contentMode = .scaleAspectFit
+               newImageView.isUserInteractionEnabled = true
+        
+        let p = UIPinchGestureRecognizer(target: self, action: #selector(pinch1))
+               let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+               newImageView.addGestureRecognizer(tap)
+               newImageView.addGestureRecognizer(p)
+               self.view.addSubview(newImageView)
+               self.navigationController?.isNavigationBarHidden = true
+               self.tabBarController?.tabBar.isHidden = true
+    }
+    @IBAction func thumbnail2(_ sender: UITapGestureRecognizer) {
+        let imageView = sender.view as! UIImageView
+               
+               newImageView = UIImageView( image: imageView.image!)
+               
+               newImageView.transform = newImageView.transform.rotated(by: CGFloat(Double.pi / 2))
+               newImageView.frame = UIScreen.main.bounds
+               newImageView.backgroundColor = .black
+               newImageView.contentMode = .scaleAspectFit
+               newImageView.isUserInteractionEnabled = true
+
+        let p = UIPinchGestureRecognizer(target: self, action: #selector(pinch2))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+               newImageView.addGestureRecognizer(tap)
+               newImageView.addGestureRecognizer(p)
+               self.view.addSubview(newImageView)
+               self.navigationController?.isNavigationBarHidden = true
+               self.tabBarController?.tabBar.isHidden = true
+        
+    }
+    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+        self.navigationController?.isNavigationBarHidden = false
+        self.tabBarController?.tabBar.isHidden = false
+        sender.view?.removeFromSuperview()
+    }
+    @objc func pinch1(_ sender: UIPinchGestureRecognizer) {
+        newImageView.image.transform = CGAffineTransform(scaleX: sender.scale, y: sender.scale)
+    }
+    @objc func pinch2(_ sender: UIPinchGestureRecognizer) {
+        newImageView.image.transform = CGAffineTransform(scaleX: sender.scale, y: sender.scale)
+    }
     
 }
