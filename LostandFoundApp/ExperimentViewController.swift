@@ -17,6 +17,7 @@ struct languages: Codable {
 
 class ExperimentViewController: UIViewController, QLPreviewControllerDataSource {
     @IBOutlet var tableview: UITableView!
+    @IBOutlet var image: UIImageView!
     lazy var previewItem=NSURL()
     var langs:languages!
     var langtable=[[String(),String()]]
@@ -89,11 +90,17 @@ class ExperimentViewController: UIViewController, QLPreviewControllerDataSource 
         return 1
     }
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
-        guard let url = Bundle.main.url(forResource: String("icon"), withExtension: "png") else {
-            fatalError("Could not load \(index).png")
-        }
-
+        
+        let data = image.image?.pngData()
+        let filename = getDocumentsDirectory().appendingPathComponent("tmp.png")
+        try? data?.write(to: filename)
+        let url=filename
         return url as QLPreviewItem
+        //return url as QLPreviewItem
+    }
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
     }
     /*
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import MapKit
 import QuickLook
-class DetailViewController: UIViewController,CLLocationManagerDelegate {
+class DetailViewController: UIViewController,CLLocationManagerDelegate,QLPreviewControllerDataSource {
     @IBOutlet var btnText: UIBarButtonItem!
     @IBOutlet var newImageView: UIImageView!
     var animal="placeholder"
@@ -175,55 +175,35 @@ class DetailViewController: UIViewController,CLLocationManagerDelegate {
 
     }
     @IBAction func thumbnail1(_ sender: UITapGestureRecognizer) {
-        
-        let imageView = sender.view as! UIImageView
-               
-               newImageView = UIImageView( image: imageView.image!)
-               
-               newImageView.transform = newImageView.transform.rotated(by: CGFloat(Double.pi / 2))
-               newImageView.frame = UIScreen.main.bounds
-               newImageView.backgroundColor = .black
-               newImageView.contentMode = .scaleAspectFit
-               newImageView.isUserInteractionEnabled = true
-        
-        let p = UIPinchGestureRecognizer(target: self, action: #selector(pinch1))
-               let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
-               newImageView.addGestureRecognizer(tap)
-               newImageView.addGestureRecognizer(p)
-               self.view.addSubview(newImageView)
-               self.navigationController?.isNavigationBarHidden = true
-               self.tabBarController?.tabBar.isHidden = true
+        let previewController = QLPreviewController()
+        newImageView=thumnail
+        previewController.dataSource = self
+        present(previewController, animated: true)
+       
     }
     @IBAction func thumbnail2(_ sender: UITapGestureRecognizer) {
-        let imageView = sender.view as! UIImageView
-               
-               newImageView = UIImageView( image: imageView.image!)
-               
-               newImageView.transform = newImageView.transform.rotated(by: CGFloat(Double.pi / 2))
-               newImageView.frame = UIScreen.main.bounds
-               newImageView.backgroundColor = .black
-               newImageView.contentMode = .scaleAspectFit
-               newImageView.isUserInteractionEnabled = true
-
-        let p = UIPinchGestureRecognizer(target: self, action: #selector(pinch2))
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
-               newImageView.addGestureRecognizer(tap)
-               newImageView.addGestureRecognizer(p)
-               self.view.addSubview(newImageView)
-               self.navigationController?.isNavigationBarHidden = true
-               self.tabBarController?.tabBar.isHidden = true
+        let previewController = QLPreviewController()
+        newImageView=thumbnail2
+        previewController.dataSource = self
+        present(previewController, animated: true)
         
     }
-    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
-        self.navigationController?.isNavigationBarHidden = false
-        self.tabBarController?.tabBar.isHidden = false
-        sender.view?.removeFromSuperview()
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return 1
     }
-    @objc func pinch1(_ sender: UIPinchGestureRecognizer) {
-        newImageView.image.transform = CGAffineTransform(scaleX: sender.scale, y: sender.scale)
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        let i = newImageView.image!
+        let newImage = UIImage(cgImage: i.cgImage!, scale: i.scale, orientation: .right)
+        let data = newImage.jpegData(compressionQuality: 1.0)
+        let filename = getDocumentsDirectory().appendingPathComponent("\(detailString ?? "tmp").jpg")
+        try? data?.write(to: filename)
+        let url=filename
+        return url as QLPreviewItem
+        //return url as QLPreviewItem
     }
-    @objc func pinch2(_ sender: UIPinchGestureRecognizer) {
-        newImageView.image.transform = CGAffineTransform(scaleX: sender.scale, y: sender.scale)
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
     }
     
 }

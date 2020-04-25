@@ -388,6 +388,9 @@
                         <viewLayoutGuide key="safeArea" id="msV-FY-V7V"/>
                     </view>
                     <navigationItem key="navigationItem" title="Experiments" id="9QD-Qz-CNp"/>
+                    <connections>
+                        <outlet property="image" destination="2wg-SE-ZXl" id="dlb-a4-bxa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="huw-Pw-76a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="TDJ-PL-ewG">
