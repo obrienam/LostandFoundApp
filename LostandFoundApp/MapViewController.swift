@@ -120,6 +120,16 @@ class MapViewController: UIViewController{
             self.mapView.addAnnotation(artwork)
         }
     }
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView)
+    {
+        let loc = view.annotation?.coordinate
+        let placemark = MKPlacemark(coordinate: loc!, addressDictionary: nil)
+            
+        // Look up the location and pass it to the completion handler
+        
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.openInMaps()
+    }
     /*
     @IBAction func longDetected(_ sender: UILongPressGestureRecognizer) {
         
