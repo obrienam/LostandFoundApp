@@ -8,11 +8,12 @@
 
 import UIKit
 import MapKit
-class MapViewController: UIViewController{
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
 
    
     @IBOutlet var mapView: MKMapView!
     let locationManager = CLLocationManager()
+   
     @IBOutlet var longPress: UILongPressGestureRecognizer!
     var loc:String!
     var loclist:NSArray!
@@ -22,11 +23,13 @@ class MapViewController: UIViewController{
     let defaults = UserDefaults.standard
     var isLoadedFirstTime = false
     var toRemove=0
+    var temp=0
     override func viewDidLoad() {
         super.viewDidLoad()
         self.mapView.showsUserLocation=true
+        self.mapView.delegate=self
         self.locationManager.requestAlwaysAuthorization()
-
+        self.locationManager.delegate=self
         // For use in foreground
         self.locationManager.requestWhenInUseAuthorization()
 
@@ -115,21 +118,62 @@ class MapViewController: UIViewController{
     }
     func addAnnotations() {
         for i in 0...testNames.count-1 {
-            let artwork = Artwork(title: "\(testNames[i])", locationName: "Place", discipline: "Location", coordinate: CLLocationCoordinate2D(latitude: testDetails[i][0], longitude: testDetails[i][1]))
-            pins.append(artwork)
-            self.mapView.addAnnotation(artwork)
+            let geocoder = CLGeocoder()
+            var location:CLPlacemark?
+            
+            let lastLocation=CLLocation(latitude: testDetails[i][0], longitude: testDetails[i][1])
+            
+            // Look up the location and pass it to the completion handler
+            geocoder.reverseGeocodeLocation(lastLocation,
+                        completionHandler: { (placemarks, error) in
+                if error == nil {
+                    location = placemarks?[0]
+                    let artwork = Artwork(title: "\(self.testNames[i])", locationName: "\(location?.name ?? "location")", discipline: "Location", coordinate: CLLocationCoordinate2D(latitude: self.testDetails[i][0], longitude: self.testDetails[i][1]))
+                    
+                    self.pins.append(artwork)
+                    self.mapView.addAnnotation(artwork)
+                }
+                else {
+                 // An error occurred during geocoding.
+                   location = nil
+                    location = placemarks?[0]
+                    let artwork = Artwork(title: "\(self.testNames[i])", locationName: "\(location?.name ?? "location")", discipline: "Location", coordinate: CLLocationCoordinate2D(latitude: self.testDetails[i][0], longitude: self.testDetails[i][1]))
+                    
+                    self.pins.append(artwork)
+                    self.mapView.addAnnotation(artwork)
+                }
+            })
+            
+            
         }
     }
-    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView)
-    {
-        let loc = view.annotation?.coordinate
-        let placemark = MKPlacemark(coordinate: loc!, addressDictionary: nil)
-            
-        // Look up the location and pass it to the completion handler
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let alert = UIAlertController(title: "Open Map?", message: "Do you want to open walking directions to the item in Apple Maps?", preferredStyle: .alert)
         
-        let mapItem = MKMapItem(placemark: placemark)
-        mapItem.openInMaps()
+        
+        
+        let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { action -> Void in
+            
+            guard let artwork = view.annotation as? Artwork else {
+                  return
+              }
+           
+            let launchOptions = [
+              MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking
+            ]
+            artwork.mapItem?.openInMaps(launchOptions: launchOptions)
+            
+        })
+        let noAction = UIAlertAction(title: "No", style: .default, handler: { action -> Void in
+            
+        })
+        alert.addAction(noAction)
+        alert.addAction(yesAction)
+        self.present(alert,animated: true, completion: nil)
+        
     }
+
+    
     /*
     @IBAction func longDetected(_ sender: UILongPressGestureRecognizer) {
         
@@ -176,5 +220,6 @@ class MapViewController: UIViewController{
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    
 }

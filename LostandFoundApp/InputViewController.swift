@@ -267,7 +267,7 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
         self.present(alert, animated: true)
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("blah")
+        
         if let location = locations.last {
             let geocoder = CLGeocoder()
                 

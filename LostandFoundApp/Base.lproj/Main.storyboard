@@ -435,7 +435,6 @@
                     <connections>
                         <segue destination="Gbq-0u-nAt" kind="relationship" relationship="viewControllers" id="DLg-cS-Fw1"/>
                         <segue destination="fF3-JE-DQh" kind="relationship" relationship="viewControllers" id="L3m-uM-yaR"/>
-                        <segue destination="aOv-xf-Qca" kind="relationship" relationship="viewControllers" id="I0r-IU-JYk"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F5i-2x-n2p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -453,9 +452,6 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" showsScale="YES" showsTraffic="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mKR-M3-u4Y">
                                 <rect key="frame" x="0.0" y="1" width="375" height="665"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outlet property="delegate" destination="fF3-JE-DQh" id="Zvp-MS-sj5"/>
-                                </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

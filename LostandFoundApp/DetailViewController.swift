@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import MapKit
 import QuickLook
-class DetailViewController: UIViewController,CLLocationManagerDelegate,QLPreviewControllerDataSource {
+class DetailViewController: UIViewController,CLLocationManagerDelegate,QLPreviewControllerDataSource,MKMapViewDelegate {
     @IBOutlet var btnText: UIBarButtonItem!
     @IBOutlet var newImageView: UIImageView!
     var animal="placeholder"
@@ -44,7 +44,7 @@ class DetailViewController: UIViewController,CLLocationManagerDelegate,QLPreview
        
         locationManager = CLLocationManager()
         
-        
+        self.mapView.delegate=self
         locationManager?.requestAlwaysAuthorization()
         locationManager?.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
@@ -80,10 +80,32 @@ class DetailViewController: UIViewController,CLLocationManagerDelegate,QLPreview
     }
     func addAnnotation(){
         
-        let artwork = Artwork(title: "\(detailString ?? "Item")", locationName: "Place", discipline: "Location", coordinate: CLLocationCoordinate2D(latitude: loclist[0] , longitude: loclist[1] ))
-        pin=artwork
-        self.mapView.addAnnotation(artwork)
+        let geocoder = CLGeocoder()
+        var location:CLPlacemark?
         
+        let lastLocation=CLLocation(latitude: loclist[0], longitude: loclist[1])
+        
+        // Look up the location and pass it to the completion handler
+        geocoder.reverseGeocodeLocation(lastLocation,
+                    completionHandler: { (placemarks, error) in
+            if error == nil {
+                location = placemarks?[0]
+                let artwork = Artwork(title: "\(self.detailString ?? "Item")", locationName: "\(location?.name ?? "location")", discipline: "Location", coordinate: CLLocationCoordinate2D(latitude: self.loclist[0], longitude: self.loclist[1]))
+                
+             
+                self.mapView.addAnnotation(artwork)
+            }
+            else {
+             // An error occurred during geocoding.
+               location = nil
+                location = placemarks?[0]
+                let artwork = Artwork(title: "\(self.detailString ?? "Item")", locationName: "\(location?.name ?? "location")", discipline: "Location", coordinate: CLLocationCoordinate2D(latitude: self.loclist[0], longitude: self.loclist[1]))
+                
+        
+                self.mapView.addAnnotation(artwork)
+            }
+        })
+       
         
     }
     /*
@@ -205,5 +227,30 @@ class DetailViewController: UIViewController,CLLocationManagerDelegate,QLPreview
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let alert = UIAlertController(title: "Open Map?", message: "Do you want to open walking directions to the item in Apple Maps?", preferredStyle: .alert)
+        
+        
+        
+        let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { action -> Void in
+            guard let artwork = view.annotation as? Artwork else {
+                  return
+              }
+            print("blah")
+            let launchOptions = [
+              MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking
+            ]
+            artwork.mapItem?.openInMaps(launchOptions: launchOptions)
+            
+        })
+        let noAction = UIAlertAction(title: "No", style: .default, handler: { action -> Void in
+            
+        })
+        alert.addAction(noAction)
+        alert.addAction(yesAction)
+        self.present(alert,animated: true, completion: nil)
+        
+    }
+    
     
 }
