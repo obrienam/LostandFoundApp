@@ -207,7 +207,7 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
             im = image
                 //save image
                 //display image
-            photoButton.setTitle("Retake Item Photo", for: .normal)
+            photoButton.setTitle("Retake Photo", for: .normal)
             b1=false
             self.dismiss(animated: true, completion: nil)
         }
@@ -216,14 +216,14 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
             im2 = image
                 //save image
                 //display image
-            photoButton2.setTitle("Retake Detail Photo", for: .normal)
+            photoButton2.setTitle("Retake Photo ", for: .normal)
             b2=false
             self.dismiss(animated: true, completion: nil)
         }
     }
     @IBAction func photoTake(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            if sender.titleLabel?.text == "Take Item Photo" || sender.titleLabel?.text == "Retake Item Photo" {
+            if sender.titleLabel?.text == "Add Photo" || sender.titleLabel?.text == "Retake Photo" {
                    imagePicked.layer.cornerRadius = 8.0
                    b1=true
                    let imagePicker = UIImagePickerController()
@@ -232,7 +232,7 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
                    imagePicker.allowsEditing = false
                    self.present(imagePicker, animated: true, completion: nil)
                 }
-            else if sender.titleLabel?.text == "Take Detail Photo" || sender.titleLabel?.text == "Retake Detail Photo"{
+            else if sender.titleLabel?.text == "Add Photo " || sender.titleLabel?.text == "Retake Photo "{
                    imagePicked2.layer.cornerRadius = 8.0
                    b2=true
                    let imagePicker = UIImagePickerController()
@@ -258,7 +258,7 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
      
         
     }
-    @IBAction func descInfo(_ sender: Any) {
+    @IBAction func descInfo(_ sender: UIButton) {
         let alert = UIAlertController(title: "Item Description", message: "Here you can input a desiption for the item, such as color or size.", preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -289,5 +289,21 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
             })
         }
     }
+    @IBAction func photoDesc1(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Item Photo", message: "For this photo, take a close up picture of the item. Try to get as many identifying features as possible in the frame to help the user identify the item.", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
+
+        self.present(alert, animated: true)
+    }
+    @IBAction func photoDesc2(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Detailed Photo", message: "For this photo, take wide shot of the item in it's environment. Try to get as of the surrounding area as possible in the frame to the user recognize where it is being left.", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
+        self.present(alert, animated: true)
+    }
+    
    
 }
