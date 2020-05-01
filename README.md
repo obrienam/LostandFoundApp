@@ -1,2 +1,2 @@
 # LostandFoundApp
-This is a repository for the lost and found iOS app for my mobile programming independent study with Dr. Fenwick
+This is an iOS lost and found app developed for my mobile programming independent study with Dr. Fenwick
