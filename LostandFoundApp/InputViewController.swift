@@ -113,13 +113,13 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
                     defaults.set(images,forKey:"TestIcons")
                     dimages?.append(pic2)
                     defaults.set(dimages,forKey:"TestImages")
-                    print(dictionary!.count)
+                   
                     return
                 }
                 
             }
             else {
-                geocoder.geocodeAddressString("Appalachian State University" ?? "Blah") { (placemarks, error) in
+                geocoder.geocodeAddressString("Appalachian State University") { (placemarks, error) in
                            if error == nil {
                                if let placemark = placemarks?[0] {
                                    let location = placemark.location!
@@ -149,7 +149,7 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
                                    defaults.set(images,forKey:"TestIcons")
                                    dimages?.append(pic2)
                                    defaults.set(dimages,forKey:"TestImages")
-                                   print(dictionary!.count)
+                                   
                                    return
                                }
                                
@@ -243,12 +243,12 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
             }
     }
     @objc func tapDone(_ sender: Any) {
-        if let datePicker = self.dateField.inputView as? UIDatePicker { // 2-1
-            let dateformatter = DateFormatter() // 2-2
-            dateformatter.dateStyle = .medium // 2-3
-            self.dateField.text = dateformatter.string(from: datePicker.date) //2-4
+        if let datePicker = self.dateField.inputView as? UIDatePicker {
+            let dateformatter = DateFormatter()
+            dateformatter.dateStyle = .medium 
+            self.dateField.text = dateformatter.string(from: datePicker.date)
         }
-        self.dateField.resignFirstResponder() // 2-5
+        self.dateField.resignFirstResponder()
     }
     @IBAction func fillLocation(_ sender: UIButton) {
       
@@ -259,7 +259,7 @@ UINavigationControllerDelegate, CLLocationManagerDelegate {
         
     }
     @IBAction func descInfo(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Item Description", message: "Here you can input a desiption for the item, such as color or size.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Item Description", message: "In this field, input descriptive information about the item such as size or color.", preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         

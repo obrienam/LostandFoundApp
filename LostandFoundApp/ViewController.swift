@@ -105,7 +105,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
       
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "cellID") as! TableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellID") as! TableViewCell
         
         cell.titleLabel?.text=testNames[indexPath.row]
         
@@ -174,24 +174,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         alert.addAction(okAction)
         alert.addAction(cancelAction)
         self.present(alert,animated: true, completion: nil)
-    }
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let addAction = UIContextualAction(style: .normal, title: "Add"){ (contextualAction,view,boolValue) in
-            self.displayAlert(section: indexPath.section,location: indexPath.row+1) }
-        
-        let swipeAction = UISwipeActionsConfiguration(actions: [addAction])
-                
-        
-        return swipeAction
-    }
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete"){
-            (contextualAction,view,boolValue) in
-            self.petArray.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
-        }
-        let swipeAction=UISwipeActionsConfiguration(actions:[deleteAction])
-        return swipeAction
     }
     @IBAction func addItem(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "inputLink", sender: self)

@@ -335,7 +335,7 @@
                         <viewLayoutGuide key="safeArea" id="YRZ-0C-uSM"/>
                     </view>
                     <navigationItem key="navigationItem" id="ek1-TE-U1Z">
-                        <barButtonItem key="rightBarButtonItem" title="Claim" style="plain" id="4T1-ol-Yr3">
+                        <barButtonItem key="rightBarButtonItem" title="Claim" id="4T1-ol-Yr3">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cql-rg-OF3">
                                 <rect key="frame" x="276" y="7" width="83" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -387,40 +387,6 @@
             </objects>
             <point key="canvasLocation" x="1077.5999999999999" y="129.98500749625188"/>
         </scene>
-        <!--Experiments-->
-        <scene sceneID="6n3-VB-wAz">
-            <objects>
-                <viewController id="rgN-ZY-g00" customClass="ExperimentViewController" customModule="LostandFoundApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="B3S-MD-uqY">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="2wg-SE-ZXl">
-                                <rect key="frame" x="64" y="197" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="TDJ-PL-ewG" appends="YES" id="fQU-pN-QdE"/>
-                                </connections>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="msV-FY-V7V"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Experiments" id="9QD-Qz-CNp"/>
-                    <connections>
-                        <outlet property="image" destination="2wg-SE-ZXl" id="dlb-a4-bxa"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="huw-Pw-76a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="TDJ-PL-ewG">
-                    <connections>
-                        <action selector="imageTapped:" destination="rgN-ZY-g00" id="Lh5-9j-LkB"/>
-                    </connections>
-                </tapGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="2136.8000000000002" y="944.97751124437787"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="3IQ-97-ubX">
             <objects>
@@ -435,6 +401,7 @@
                     <connections>
                         <segue destination="Gbq-0u-nAt" kind="relationship" relationship="viewControllers" id="DLg-cS-Fw1"/>
                         <segue destination="fF3-JE-DQh" kind="relationship" relationship="viewControllers" id="L3m-uM-yaR"/>
+                        <segue destination="u69-O3-bgB" kind="relationship" relationship="viewControllers" id="bDC-0k-a5w"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F5i-2x-n2p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -473,31 +440,72 @@
             </objects>
             <point key="canvasLocation" x="148" y="957"/>
         </scene>
-        <!--Experiment-->
-        <scene sceneID="WQd-wS-IKd">
+        <!--About-->
+        <scene sceneID="eKD-vG-6oJ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aOv-xf-Qca" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Experiment" image="folder" catalog="system" id="1YP-0N-gl4"/>
+                <viewController id="WgZ-Lv-isK" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Dnp-KM-TJN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pNb-if-a7y">
+                                <rect key="frame" x="5" y="177" width="372" height="128"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <string key="text">(c) Aidan O'Brien 2020
+Development performed in partial fulfillment of M.S. degree requirements.
+MIT Licensed</string>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LostandFound App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wli-gg-2HA">
+                                <rect key="frame" x="91" y="80" width="197" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Wli-gg-2HA" firstAttribute="leading" secondItem="fgY-3T-b1x" secondAttribute="leading" constant="91" id="8nW-Bh-I5H"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="pNb-if-a7y" secondAttribute="trailing" constant="-18" id="bYW-P6-ub9"/>
+                            <constraint firstItem="pNb-if-a7y" firstAttribute="leading" secondItem="fgY-3T-b1x" secondAttribute="leading" constant="5" id="eED-GA-YYg"/>
+                            <constraint firstItem="pNb-if-a7y" firstAttribute="top" secondItem="Wli-gg-2HA" secondAttribute="bottom" constant="68" id="pvo-Oi-Fub"/>
+                            <constraint firstItem="fgY-3T-b1x" firstAttribute="bottom" secondItem="pNb-if-a7y" secondAttribute="bottom" constant="313" id="rJD-qd-a3s"/>
+                            <constraint firstItem="Wli-gg-2HA" firstAttribute="top" secondItem="fgY-3T-b1x" secondAttribute="top" constant="36" id="wSi-by-gbw"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="fgY-3T-b1x"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="About" id="OEl-fx-NfC"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yd8-W7-XI4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2064.8000000000002" y="970.16491754122944"/>
+        </scene>
+        <!--About-->
+        <scene sceneID="RCM-5d-Uyu">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="u69-O3-bgB" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="About" image="person" catalog="system" id="SUa-sZ-FuT"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fQS-Lp-MO5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="TYE-de-Xwl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="rgN-ZY-g00" kind="relationship" relationship="rootViewController" id="pAp-Rc-MJ5"/>
+                        <segue destination="WgZ-Lv-isK" kind="relationship" relationship="rootViewController" id="5V4-yL-C7O"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ful-BD-fwy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ngN-QI-6Pe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1162" y="943"/>
+            <point key="canvasLocation" x="1125.5999999999999" y="970.16491754122944"/>
         </scene>
     </scenes>
     <resources>
-        <image name="folder" catalog="system" width="128" height="95"/>
-        <image name="icon.png" width="96" height="96"/>
         <image name="location" catalog="system" width="128" height="115"/>
         <image name="map" catalog="system" width="128" height="113"/>
+        <image name="person" catalog="system" width="128" height="117"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="questionmark.circle" catalog="system" width="128" height="121"/>
     </resources>
